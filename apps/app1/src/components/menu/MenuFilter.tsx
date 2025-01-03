@@ -25,7 +25,7 @@ const MenuFilter = () => {
   })
 
   const { setSelectedShop, setSelectedCategory } = MenuContainer.useContainer()
-  const { register, handleSubmit, resetField, getValues } = useForm<MenuFilterFormType>()
+  const { register, handleSubmit, resetField } = useForm<MenuFilterFormType>()
   const onSubmit = handleSubmit((data) => {
     const shopId = parseInt(data?.shop)
     setSelectedShop(shopId ? shopId : undefined)

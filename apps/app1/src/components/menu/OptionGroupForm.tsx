@@ -60,6 +60,8 @@ const OptionGroupForm = ({ formId, formControls, fieldArrayControls, onSubmit }:
         return t('common:validate-text.unit-count.max', { count: MAX_UNIT_COUNT })
       case ValidateCountsErrorEnum.NOT_NUMBER:
         return undefined
+      default:
+        return undefined
     }
   }
 

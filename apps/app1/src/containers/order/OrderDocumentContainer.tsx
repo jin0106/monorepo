@@ -21,7 +21,6 @@ import { ApiUtils } from '@/utils/apiUtils'
 const eventManagerKey = 'OrderDocumentContainer'
 
 const OrderDocumentContainer = createContainer(() => {
-  const { t } = useTranslation([I18nNamespaceEnum.Order, I18nNamespaceEnum.Common])
   const queryClient = useQueryClient()
   const { sitesList: sites } = useAllSitesList()
   // orders filter

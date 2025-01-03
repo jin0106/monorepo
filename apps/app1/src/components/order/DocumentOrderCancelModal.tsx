@@ -8,7 +8,7 @@ import { ModalPropsType } from '@/hooks/common/useModal'
 const DocumentOrderCancelModal = ({ modalProps }: { modalProps?: ModalPropsType }) => {
   const { t } = useTranslation([I18nNamespaceEnum.Order, I18nNamespaceEnum.Common])
   const [cancelText, setCancelText] = useState<string>('')
-  const { mutateOrderCancel, documentOrderCancelModalControls } = OrderDocumentContainer.useContainer()
+  const { mutateOrderCancel } = OrderDocumentContainer.useContainer()
 
   const onSubmit = () => {
     if (!modalProps?.modalData?.orderNumber || !cancelText) {

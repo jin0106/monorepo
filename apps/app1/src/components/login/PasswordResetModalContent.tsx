@@ -112,7 +112,7 @@ const PasswordResetModalContent = ({ modalControls }: PasswordResetModalContentP
 
     return undefined
   }
-  const passwordResetErrorMessage = getPasswordResetErrorMessage()
+  const passwordResetErrorMessage = !!getPasswordResetErrorMessage()
   const isPasswordResetButtonDisabled =
     isUpdateUserPasswordLoading || !passwordNew || !passwordNewConfirm || passwordResetErrorMessage
 

@@ -30,10 +30,6 @@ const OptionGroupSeriesChangeModal = (props: OptionGroupSeriesChangeModalProps) 
   )
 }
 
-const sortGroupBySeries = (optionGroups: AdminProductOptionGroupRes[]) => {
-  return optionGroups.sort((groupA, groupB) => (groupA.series ?? 0) - (groupB.series ?? 0))
-}
-
 const OptionGroupSeriesChangeModalContent = ({
   shopId,
   product,

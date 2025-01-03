@@ -13,7 +13,7 @@ type MemberFilterFormType = {
 const MemberFilter = () => {
   const { t } = useTranslation([I18nNamespaceEnum.Member, I18nNamespaceEnum.Common])
   const { setSearchParam } = MemberContainer.useContainer()
-  const { register, handleSubmit, resetField } = useForm<MemberFilterFormType>()
+  const { register, handleSubmit } = useForm<MemberFilterFormType>()
   const onSubmit = handleSubmit((data) => {
     setSearchParam(data)
   })

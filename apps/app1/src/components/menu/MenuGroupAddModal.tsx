@@ -34,7 +34,6 @@ const MenuGroupAddModalContent = ({
     formState: { isValid },
     watch,
     setValue,
-    trigger
   } = useForm<Omit<AdminProductCategoryCreateReqRequest, 'shop'>>({
     mode: 'onChange',
     shouldFocusError: true,
