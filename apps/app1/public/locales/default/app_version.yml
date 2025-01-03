@@ -1,0 +1,33 @@
+empty_version: 등록된 버전이 없습니다
+minimum_version: 최소 버전
+add_app_version: 앱버전 등록하기
+android: 안드로이드
+update: 수정
+device_type: 구분
+title: 앱버전 관리
+latest_version: 최신 버전
+alert:
+  latest_version_error: 최신버전 규칙 오류
+  minimum_version_error: 최소버전 규칙 오류
+name: 이름
+package_name: 패키지명
+id: 번호
+modal:
+  create:
+    add: 등록
+    minimum_version: 최소 버전
+    latest_version: 최신 버전
+    optional_update: 선택 업데이트
+    mandatory_update: 필수 업데이트
+    name: 이름
+    package_name: 패키지명
+    title: 앱버전 관리
+  update:
+    add: 등록
+    minimum_version: 최소 버전
+    latest_version: 최신 버전
+    optional_update: 선택 업데이트
+    mandatory_update: 필수 업데이트
+    name: 이름
+    package_name: 패키지명
+    title: 앱버전 관리

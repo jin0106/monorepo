@@ -1,0 +1,28 @@
+card:
+  button:
+    order_cancel: Cancel order
+    start_delivery: Start
+    open_cargo: Open cargo
+  order_status:
+    delivering: Delivering
+    delivered: Delivered
+    cancel_order: Canceled
+    loading_arrived: Arrived
+    loading_start: Moving a neubie
+  cancel_reason: Cancel reason
+  assign_neubie: Neubie in charge
+  sender_info: sender/info
+  order_number: Delivery no
+  origin: Source
+  destination: Destination
+  title: Order no. {{index}}
+  user_note: Customer Request
+  receiver_info: receiver/info
+  delivery_price: Price
+modal:
+  cancel:
+    cta: Cancel order
+    other_placeholder: Please enter reason of cancel
+    header: Cancel order
+empty:
+  content: Thare are no order records

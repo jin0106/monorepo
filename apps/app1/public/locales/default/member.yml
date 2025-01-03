@@ -1,0 +1,21 @@
+user_type: 권한
+cta_create_member: 회원 생성하기
+empty_member: 등록된 회원이 없습니다
+name: 이름
+created_at: 생성일
+id: 번호
+modal:
+  create:
+    password_placeholder: 비밀번호를 입력해주세요
+    email_placeholder: 이메일을 입력해주세요
+    title: 회원 등록
+    company_placeholder: 기업 선택
+    site_placeholder: 사이트 선택
+    cta: 등록
+    shop_placeholder: 매장 선택
+    user_type_placeholder: 권한 선택
+    mobile_number_placeholder: 휴대폰번호를 입력해주세요
+    user_type: 권한
+    name: 이름
+    name_placeholder: 이름을 입력해주세요
+    mobile_number: 핸드폰 번호

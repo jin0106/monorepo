@@ -1,0 +1,18 @@
+create_order: 주문 생성하기
+modal:
+  cancel:
+    description: 직접 생성한 주문은 취소기능이 아직 지원되지 않으므로 주문취소가 필요한 경우 뉴비고에서 임무 완료 처리 후 이곳에 기록을
+      남겨주세요.
+    placeholder: 필요한 내용을 입력하세요.
+    title: 주문취소 기록
+  create:
+    cta: 주문 생성
+    mobile_number_placeholder: 주문자 휴대 전화번호를 입력하세요(-포함하여 작성)
+    order_total_price_placeholder: 주문 금액을 입력하세요
+    search-word: Search for a delivery location
+    select_location: Select a delivery location
+    address_placeholder: 배달지 주소를 검색하세요
+    name_placeholder: 주문 상품을 입력하세요
+    delivery_total_price_placeholder: 배달 금액을 입력하세요
+    node_placeholder: 목적지를 선택하세요
+order_info: 주문일시/번호

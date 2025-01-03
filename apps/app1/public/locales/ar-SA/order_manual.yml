@@ -1,0 +1,19 @@
+create_order: Place order
+modal:
+  cancel:
+    description: The cancellation function is not yet supported for orders created
+      by yourself, so if you need to cancel your order, you can go here after the
+      mission is completed by Newvigo Please leave a record.
+    placeholder: 'Please enter the required content. '
+    title: 'Order Cancellation Record '
+  create:
+    cta: Place order
+    mobile_number_placeholder: Enter customer contact number(including dashes(-))
+    order_total_price_placeholder: Enter order price
+    search-word: Search for a delivery location
+    select_location: Select a delivery location
+    address_placeholder: Search for the destination address
+    name_placeholder: Enter order items
+    delivery_total_price_placeholder: Enter delivery price
+    node_placeholder: Select destination
+order_info: Date/number

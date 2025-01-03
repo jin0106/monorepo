@@ -1,0 +1,17 @@
+{
+  "name": "@neubie/app1",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "daisyui": "^2.52.0",
+    "next": "14.2.16",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-tooltip": "^5.28.0"
+  },
+  "nx": {
+    "name": "app1",
+    "projectType": "application",
+    "sourceRoot": "apps/app1"
+  }
+}

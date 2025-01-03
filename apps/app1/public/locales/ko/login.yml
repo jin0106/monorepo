@@ -1,0 +1,26 @@
+password-reset:
+  text: 비밀번호 초기화
+  modal:
+    button:
+      password-reset: 비밀번호 초기화
+      authentication: 본인 인증
+    password-new-confirm:
+      placeholder: 새로운 비밀번호 확인
+    password-new:
+      placeholder: 새로운 비밀번호 입력
+    mobile-number:
+      placeholder: 전화번호 입력
+    id:
+      placeholder: 아이디 입력
+    title:
+      password-reset: 비밀번호 초기화
+      authentication: 본인 인증
+    password-helper-text: 특수문자, 숫자, 대문자, 소문자 중 최소 3개가 포함되어 최소 8자 이상 입력해주세요.
+    validation:
+      auth-failed: '{{maxCount}}회 이상 잘못 입력하였습니다. 고객 센터({{csNumber}})으로 연락해주세요.'
+      password-format-invalid: 특수문자, 숫자, 대문자, 소문자 중 최소 3개가 포함되어 최소 8자 이상 입력해주세요.
+      password-confirm-failed: 비밀번호가 일치하지 않습니다.
+      id-mobile-number-not-equals: 올바르지 않은 아이디나 전화번호를 입력했습니다.({{count}}/{{maxCount}})
+password-placeholder: 비밀번호를 입력해주세요
+login: 로그인
+title: Admin 로그인

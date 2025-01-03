@@ -1,0 +1,79 @@
+order_driving_log:
+  cta: Download operations log
+  title: Operations Log
+  content: You can download the operations log here
+delivery_food: Food delivery
+start_node: Source
+cancel_note: Reason of cancel
+order_number: Order number
+take_orders: 'Take orders '
+order_price: Price
+content: Cancel this order?
+empty_content: There are no registered stores
+empty:
+  content: Thare are no order records
+order_process: Process Order
+filter:
+  order_status: Order status
+delivery_fee: Delivery fee
+end_node: Destination
+order_date: Date
+order_status: Status
+open_cover: Open cargo
+order_products: Items
+manual_cancel: Manually cancel an order
+phone: Customer contact number
+look_up_destination: 'To look up destinations '
+delivery_start: Start
+card:
+  order_description_title: '{{count}} order items'
+  used_point: Points of Use
+  customer_phone_number: Customer contact
+  used_coupon: Coupons of Use
+  neubie_name: Neubie in charge
+  total_price: Total price
+  sender_info: Sender/Phone
+  origin: Source
+  destination: Destination
+  order_price: Order price
+  title: Order no. {{index}}
+  button:
+    order_accept: Accept order
+    cancellation_complete: Manual cancel
+    order_cancel: Cancel order
+    order_canceled_fail: Cancellation failed
+    start_delivery: Start
+    open_cargo: Open cargo
+  delivery_fee: Delivery fee
+  order_status:
+    delivering: Delivering
+    arrived: Arrived
+    preparing: ''
+    request_order: Order placed
+    request_cancel: Request cancel
+    delivered: Arrived
+    cancel_order: Canceled
+    loading_arrived: Neubie arrived
+    loading_start: Moving a neubie
+  cancel_reason: Reason of cancellation
+  assign_neubie: Neubie in charge
+  order_description_old_title: order items
+  user_note: Requests
+  receiver_info: Receiver/Phone
+modal:
+  cancel:
+    cta: Cancel order
+    cargo_limit: Order exceeds cargo limit
+    other: Other
+    other_placeholder: Please enter reason of cancel
+    customer_request: Customer request
+    err_no_cancel_reason: No order number or cancel reason
+    sold_out: Menu is out of stock
+    no_neubie: There are no available Neubie to deliver
+    cancel_order: Cancel order
+  order_driving_log:
+    cta: Download
+    title: Download operations log
+    select_site: Select site
+  detail:
+    title: Order History
