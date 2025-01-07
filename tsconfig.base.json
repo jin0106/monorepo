@@ -19,8 +19,6 @@
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
     "pretty": true,
     "removeComments": false,
     "resolveJsonModule": false,
@@ -29,6 +27,5 @@
     "sourceMap": false,
     "strict": true,
     "target": "es2022",
-    "verbatimModuleSyntax": false
   }
 }

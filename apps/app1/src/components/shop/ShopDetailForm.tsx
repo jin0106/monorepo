@@ -196,7 +196,7 @@ const ShopDetailForm = ({
             disabled={disabledNames?.has('lastOrderAt')}
             placeholder={t('common:please_select')}
             type={'time'}
-            description={isOpenToNextDay && t('shop:register.close-time.next-day')}
+            description={isOpenToNextDay ? t('shop:register.close-time.next-day') :undefined}
             descriptionClassName={NEXT_DAY_DESCRIPTION_TEXT_COLOR}
             validate={(value, formValues) => {
               if (!value) {
@@ -218,7 +218,7 @@ const ShopDetailForm = ({
             className={ComponentUtils.cn('w-full', isBreakStartNextDAy && NEXT_DAY_TEXT_COLOR)}
             label={{ title: t('shop:register.break_start_at') }}
             disabled={disabledNames?.has('breakStartAt')}
-            description={isBreakEndNextDay && t('shop:register.break-start-time.next-day')}
+            description={isBreakEndNextDay ? t('shop:register.break-start-time.next-day'):undefined}
             descriptionClassName={NEXT_DAY_DESCRIPTION_TEXT_COLOR}
             placeholder={t('common:please_select')}
             type={'time'}
@@ -276,7 +276,7 @@ const ShopDetailForm = ({
             className={ComponentUtils.cn('w-full', isBreakEndNextDay && NEXT_DAY_TEXT_COLOR)}
             label={{ title: t('shop:register.break_end_at') }}
             disabled={disabledNames?.has('breakEndAt')}
-            description={isBreakEndNextDay && t('shop:register.break-end-time.next-day')}
+            description={isBreakEndNextDay ? t('shop:register.break-end-time.next-day'):undefined}
             descriptionClassName={NEXT_DAY_DESCRIPTION_TEXT_COLOR}
             placeholder={t('common:please_select')}
             type={'time'}
