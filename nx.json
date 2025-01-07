@@ -46,5 +46,13 @@
         "linter": "eslint"
       }
     }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheDirectory": "/tmp/nx-cache"
+      }
+    }
   }
 }
