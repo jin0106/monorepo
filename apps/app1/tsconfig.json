@@ -1,34 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "preserve",
-    "strict": true,
-    "noEmit": true,
-    "emitDeclarationOnly": false,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/icons/*": ["./public/icons/*"],
-      "@/rawIcons/*": ["./public/rawIcons/*"],
-      "@/images/*": ["./public/images/*"],
-      "@/*": ["./src/*"]
-    },
+    "target": "es6",
+    "baseUrl": ".",
     "outDir": "out-tsc/app1",
-    "rootDir": "src",
     "tsBuildInfoFile": "out-tsc/app1/tsconfig.tsbuildinfo"
   },
   "include": [
