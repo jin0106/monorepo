@@ -9,7 +9,7 @@ import { DeployEnvironmentEnum } from '@/constants/deployEnvironment.enum'
 import AuthContainer from '@/containers/common/AuthContainer'
 import NativeBridgeContainer, { nativeBridgeSetup } from '@/containers/common/NativeBridgeContainer'
 import type { AppProps } from 'next/app'
-import '../../../../node_modules/react-tooltip/dist/react-tooltip.css'
+import 'react-tooltip/dist/react-tooltip.css'
 import '../styles/globals.css'
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {

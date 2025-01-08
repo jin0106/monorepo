@@ -2,6 +2,24 @@
   "name": "@neubie/app1",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "gen-dev": "rm -rf src/api/generated && orval --config orval.dev.config.js",
+    "gen-staging": "rm -rf src/api/generated && orval --config orval.staging.config.js",
+    "build-icons": "node build-icon-script.js && node lazy-icon-script.js",
+    "prepare": "husky install && chmod +x .husky/pre-commit && chmod +x .husky/pre-push"
+
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "@nx/next": "^20.3.0",
     "@types/crypto-js": "^4.2.2",
