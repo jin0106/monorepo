@@ -43,6 +43,7 @@
     "@eslint/compat": "^1.2.4",
     "@heroicons/react": "^2.2.0",
     "@hookform/error-message": "^2.0.1",
+    "@nrwl/nx-cloud": "^19.1.0",
     "@nx/eslint-plugin": "^20.3.0",
     "@nx/next": "20.3.0",
     "@tanstack/react-query": "^4.35.3",
