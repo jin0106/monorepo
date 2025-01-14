@@ -5,7 +5,7 @@
   "scripts": {
     "gen-dev": "rm -rf src/api/generated && orval --config orval.dev.config.js",
     "gen-staging": "rm -rf src/api/generated && orval --config orval.staging.config.js",
-    "build-icons": "node build-icon-script.js && node lazy-icon-script.js",
+    "build-icons": "node build-icon-script.js && node lazy-icon-script.js"
   },
   "dependencies": {
     "@nx/next": "^20.3.0",
