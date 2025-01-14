@@ -60,7 +60,7 @@ const PageLoginContent = () => {
     <div className="flex min-h-screen items-center justify-center bg-base-200">
       <section className="card w-full max-w-2xl rounded-xl bg-base-100 p-20 shadow-xl">
         <h1 className="mb-2 text-center text-2xl font-semibold">{t('login:title')}</h1>
-        <div>app2</div>
+        <div>app2 delete</div>
         <form ref={formRef} className="form-control flex  gap-2" onSubmit={onSubmit}>
           <div>
             <label className="label">
