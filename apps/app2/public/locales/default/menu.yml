@@ -1,0 +1,110 @@
+template:
+  summary: 엑셀 양식에 맞춰 작성하신 후 파일을 업로드 하면 메뉴 리스트가 생성됩니다
+  cta: 메뉴 관리 엑셀 다운로드
+  content: 메뉴 등록을 위해 엑셀 파일을 내려받아 주세요
+image_upload: Image upload
+option_count: '{{n}}개 옵션'
+main_image: 이미지
+table-header:
+  menu-group-fix: 메뉴 그룹 수정
+  menu-group-add: 메뉴 그룹 등록
+  menu-group-order-change: 메뉴 그룹 순서 변경
+option_detail: 옵션상세
+file_upload:
+  uploading_file: 파일 업로드 중입니다
+  content: 여기에 파일을 끌어다 놓으면 파일이 업로드됩니다
+  guide: 메뉴 리스트 생성을 위해 엑셀 파일을 내려받은 후 작성하여 파일을 다시 업로드 해주세요
+  select_file: 파일 선택
+  upload_file: 파일 업로드
+menu-group-update-modal:
+  represent-menu-group-name: 대표 메뉴
+  title: 메뉴 그룹 수정
+menu-create-modal:
+  unit-price:
+    validator-text: 0원 ~ 1,000,000원 사이로 입력해주세요
+  image:
+    label: 메뉴 이미지
+  menu-description:
+    validator-text: 최대 500자까지 입력 가능해요
+    placeholder: 메뉴 설명을 작성해 주세요 (선택)
+  menu-name:
+    validator-text: 최대 100자까지 입력 가능해요
+    label: 메뉴명
+  main-menu: 대표메뉴
+  ok-button: 메뉴 등록
+  title: 메뉴 등록
+menu-update-modal:
+  ok-button: 메뉴 수정
+  title: 메뉴 수정
+table-row-header:
+  menu-add: 메뉴 등록
+  menu-series-change: 순서 변경
+modal:
+  change_status:
+    content: 상태를 변경하시겠습니까
+  option_detail:
+    series-change-option-group: 옵션 그룹 순서 변경
+    option-group-desscription:
+      optional: 선택옵션, 전체 옵션 선택
+      required: Required options, at least {{minCount}} to at most {{maxCount}}
+    option-group-series-modal:
+      description: 의 옵션그룹입니다.
+    update-option-group-modal:
+      ok-button: 옵션 (그룹) 수정
+    add-option-button: 옵션 그룹 등록
+    add-option-group-modal:
+      add-option-button: 옵션 추가
+      ok-button: 옵션 등록
+      option-header-title: 옵션
+      name:
+        label: 옵션 그룹명
+      minCount:
+        label: 최소 수량
+      option-name:
+        place-holder-text: 옵션명
+      title: 옵션 (그룹) 등록
+      maxCount:
+        validator-min-text: 최대 수량을 1개 이상으로 입력해 주세요.
+        validator-text: 최대 수량은 최소 수량보다 같거나 크게 작성해 주세요
+        label: 최대 수량
+    option-update-button: 옵션 (그룹) 수정
+    description: 의 옵션입니다
+    option-series-modal:
+      description: 의 옵션입니다.
+    option_name: 옵션명
+    series-change-option: 옵션 순서 변경
+    title: 옵션 상세
+    delete-option-group-modal:
+      title: 옵션 그룹 삭제
+      content: 선택하신 옵션 그룹을 삭제하시겠어요?
+      warning-content: 옵션 그룹 삭제 시 하위 옵션이 모두 삭제되니 주의해주세요.
+    empty-text: 옵션을 등록해주세요
+sell_status_placeholder: 상태값 선택
+image: 이미지
+menu-group-series-change-modal:
+  title: 메뉴 그룹 순서 변경
+menu-series-change-modal:
+  subtitle: 의 메뉴입니다
+  title: 메뉴 순서 변경
+status_update_content: 상태를 변경하시겠습니까?
+unit_price: 가격
+sell_status: 판매상태
+menu-group-add-modal:
+  main-menu-set:
+    label-help-text: 대표메뉴 설정 시 뉴비오더 첫 번째로 노출됩니다.
+    label-text: 대표메뉴(0번) 설정
+  ok-button: 메뉴 그룹 등록
+  menu-group-name:
+    validator-text: 최대 30자까지 입력 가능해요
+    label: 메뉴 그룹명
+  title: 메뉴 그룹 등록
+empty_shop: 사이트와 가게를 선택해 주세요
+name: 메뉴명
+image_upload_content: 이미지를 등록하시겠습니까?
+menu-delete-modal:
+  title: 메뉴 삭제
+  content: 선택하신 메뉴를 삭제하시겠어요?
+excel-upload:
+  button: 메뉴 등록 엑셀 다운로드
+  sub-title: 엑셀 템플릿 사용하여 메뉴를 등록할 수 있어요
+  title: 메뉴 등록 엑셀 파일 다운로드

@@ -1,0 +1,21 @@
+user_type: Permission
+cta_create_member: Register user
+empty_member: There are no registered stores
+name: Name
+created_at: Created at
+id: Number
+modal:
+  create:
+    password_placeholder: Please enter password
+    email_placeholder: Enter email
+    title: Register user
+    company_placeholder: Select company
+    site_placeholder: Site
+    cta: Register
+    shop_placeholder: Shop
+    user_type_placeholder: Select permission
+    mobile_number_placeholder: Please enter mobile number
+    user_type: Permission
+    name: Name
+    name_placeholder: Enter name
+    mobile_number: Mobile number

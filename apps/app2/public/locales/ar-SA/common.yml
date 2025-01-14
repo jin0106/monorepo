@@ -1,0 +1,108 @@
+cancel: Cancel
+shop_temp_close: Temporary close
+shop: Shop
+upload: Upload
+shop_close: Closed
+save: Save
+update: Edit
+valueUnit:
+  count: Count
+error:
+  site_not_selected: Select site
+  address_empty: Enter the address
+  file_not_selected: Please select files
+delete: Del
+basic_address: Shop address
+invalid_address: Please enter accurate address
+order_status:
+  delivering: Delivering
+  canceled: Canceled
+  checking: Checking
+  preparing: Preparing
+  request_cancel: Cancellation request
+  ready: Waiting
+  delivered: Arrived
+  error: Error
+  order_request: Request order
+logout: Sign out
+user_type:
+  site_admin: Site manager
+  admin: Admin
+  company_admin: Company manager
+  user: User
+  shop_admin: Shop manager
+terms:
+  eft_terms_and_conditions: EFT Terms and Conditions
+  privacy_policy: Privacy Policy
+  service_terms_of_use: Service Terms of Use
+  terms_of_use: Terms of Use
+price:
+  label: Price
+create: Register
+close: Close
+order_type:
+  basic: Basic order
+  manual: Manual order
+image: Image
+period: Period
+input-validate:
+  max-length: You can enter up to {{maxLength}} characters.
+image_size: Image size
+detail_address: Detailed address
+please_select: Please select
+sale_status:
+  sale: Sale
+  hidden: Hide
+  sold_out: Soldout
+shop_open: Open
+menu:
+  shop: Shop management
+  app_version: App Version Management
+  manual_order: Manual food order
+  document_order: Document Order List
+  member: User management
+  menu: Menu Management
+  neubie_order: Food order
+  order: Order List
+  settlement: Settlement details
+address_number: Zip code
+confirm: Confirm
+filter:
+  shop: Shop
+  select_company: Select company
+  select_member: Select a user
+  year: Year
+  select_shop: Select Shop
+  order_status: Order status
+  reset_date: Reset date
+  delivery_period: Order period
+  order_period: Order period
+  delivery_type: Services
+  select_year: Select year
+  all_shop: Shops
+  all_member: Users
+  select_site: Select a site
+  all_sites: Sites
+price_unit: SAR
+file_mb: 'Max file size: {{size}} MB'
+input:
+  validate:
+    number: Only numbers can be entered.
+    file_type_image:
+      not_allowed: 'This is not an allowed image file. '
+      width-height: 'Image is too large. (Max width: {{width}}px, Max height: {{height}}px)'
+      on-load-fail: 'Failed to retrieve image. '
+    file_size_smaller: Select file smaller than {{size}} MB
+    file_type_excel: Only xls or xlsx file is allowed
+    number_hyphen: Only numbers and '-' can be entered.
+    max_length: Up to 20 characters can be entered.
+month: Month
+err_occurred: An error has occurred
+add-image:
+  helper: 'Recommended Image Size: {{width}}x{{height}}, File Size: under {{fileSize}}MB'
+delete-button: Delete
+delivery_tip: Delivery tip
+validate-text:
+  unit-count:
+    max: Please enter a quantity of {{count}} or less
+logo_text: NeubieOrder Manager

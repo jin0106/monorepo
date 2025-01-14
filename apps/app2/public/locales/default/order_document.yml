@@ -1,0 +1,28 @@
+card:
+  button:
+    order_cancel: 배달취소
+    start_delivery: 배달 시작
+    open_cargo: 적재함 열기
+  order_status:
+    delivering: 배달 중
+    delivered: 배달 완료
+    cancel_order: 배달 취소
+    loading_arrived: 뉴비 도착
+    loading_start: 뉴비 이동중
+  cancel_reason: 취소 사유
+  assign_neubie: 담당 뉴비
+  sender_info: 발신자/연락처
+  order_number: 배달 번호
+  origin: 출발지
+  destination: 목적지
+  title: '{{index}}번 배달'
+  user_note: 전달 사항
+  receiver_info: 수신자/연락처
+  delivery_price: 배송 요금
+modal:
+  cancel:
+    cta: 배달취소
+    other_placeholder: 취소 사유를 입력하세요
+    header: 문서배달을 취소하시겠습니까?
+empty:
+  content: 배달내역이 없습니다

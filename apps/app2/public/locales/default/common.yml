@@ -1,0 +1,109 @@
+cancel: 취소
+shop_temp_close: 영업 임시중지
+shop: 가게
+upload: 업로드
+shop_close: 영업중지
+save: 저장
+update: 수정
+valueUnit:
+  count: 개
+error:
+  site_not_selected: 사이트를 선택해주세요
+  address_empty: 주소를입력해주세요
+  file_not_selected: 파일을 선택해주세요
+delete: 삭제
+basic_address: 기본주소
+invalid_address: 주소 정보를 정확히 입력해주세요
+order_status:
+  delivering: Delivering
+  canceled: 주문취소
+  checking: 주문 확인 중
+  preparing: 메뉴 준비 중
+  request_cancel: 주문 취소 요청
+  ready: 주문 대기
+  delivered: 배달 완료
+  error: Error
+  order_request: Request order
+logout: 로그아웃
+user_type:
+  site_admin: 사이트 관리자
+  admin: 최고 관리자
+  company_admin: 기업 관리자
+  user: 일반 회원
+  shop_admin: 매장 관리자
+terms:
+  eft_terms_and_conditions: 전자금융거래 이용약관
+  privacy_policy: 개인정보처리방침
+  service_terms_of_use: 서비스 이용약관
+  terms_of_use: 이용약관
+price:
+  label: 가격
+create: 등록
+close: 닫기
+order_type:
+  basic: 자동 주문
+  manual: 수동 주문
+image: 이미지
+period: 기간
+input-validate:
+  max-length: 최대 {{maxLength}}자까지 입력 가능해요
+image_size: 이미지 사이즈
+detail_address: 상세주소
+please_select: 선택해 주세요
+sale_status:
+  sale: 판매중
+  hidden: 숨김 처리
+  sold_out: 품절 처리
+shop_open: 영업중
+menu:
+  shop: 가게관리
+  app_version: 앱버전 관리
+  manual_order: 음식 수동 주문
+  document_order: 문서 배달
+  member: 회원 관리
+  menu: 메뉴관리
+  neubie_order: 음식 주문
+  order: 뉴비 배달 관리
+  settlement: 정산 내역
+address_number: 우편번호
+confirm: 확인
+filter:
+  shop: 매장
+  select_company: Select company
+  select_member: 회원 선택
+  year: 년도
+  select_shop: 가게 선택
+  order_status: Order status
+  reset_date: 날짜 초기화
+  delivery_period: 배달기간
+  order_period: 주문기간
+  delivery_type: 서비스 전체
+  select_year: 년도 선택
+  all_shop: 전체 가게
+  all_member: 전체 회원
+  select_site: 사이트 선택
+  all_sites: 전체 사이트
+price_unit: 원
+file_mb: 파일 용량:최대 {{size}} Mb
+input:
+  validate:
+    number: Only numbers can be entered.
+    file_type_image:
+      not_allowed: 허용되는 이미지 파일이 아닙니다.
+      width-height: '이미지의 크기가 너무 큽니다. (최대 너비: {{width}}px, 최대 높이: {{height}}px)'
+      on-load-fail: 이미지를 불러오는데 실패했습니다.
+    file_size_smaller: Select file smaller than {{size}} MB
+    file_type_excel: Only xls or xlsx file is allowed
+    number_hyphen: Only numbers and '-' can be entered.
+    max_length: 최대 20자까지 입력 가능해요
+month: 월
+err_occurred: 오류가 발생했습니다
+add-image:
+  helper: '권장 이미지 사이즈: {{width}}x{{height}}, 파일 용량: 최대 {{fileSize}}MB 에 맞춰 png, jpg
+    확장자로 등록해주세요'
+delete-button: 삭제
+delivery_tip: 배달팁
+validate-text:
+  unit-count:
+    max: 최대 수량을 {{count}}개 이하로 입력해 주세요
+logo_text: NeubieOrder Manager

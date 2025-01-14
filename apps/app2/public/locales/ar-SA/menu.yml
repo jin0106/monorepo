@@ -1,0 +1,113 @@
+template:
+  summary: Fill out the excel template and upload the file to create your menu list
+  cta: Download menu management excel
+  content: Download excel file to register menu
+image_upload: Image upload
+option_count: '{{n}} options'
+main_image: Image
+table-header:
+  menu-group-fix: Edit Menu Group
+  menu-group-add: Add Menu Group
+  menu-group-order-change: Rearrange Menu Group
+option_detail: Option Detail
+file_upload:
+  uploading_file: Files are being uploaded
+  content: Drag and drop to upload file
+  guide: Download, compose and upload to create menu list
+  select_file: Select files
+  upload_file: Upload files
+menu-group-update-modal:
+  represent-menu-group-name: Main Menu
+  title: Edit Menu Group
+menu-create-modal:
+  unit-price:
+    validator-text: Please enter an amount between 0 and 1000 SR
+  image:
+    label: Menu Image
+  menu-description:
+    validator-text: You can enter up to 500 characters.
+    placeholder: Menu Description (Optional)
+  menu-name:
+    validator-text: You can enter up to 100 characters.
+    label: Menu Name
+  main-menu: Main Menu
+  ok-button: Add Menu
+  title: Add Menu
+menu-update-modal:
+  ok-button: Edit Menu
+  title: Edit Menu
+table-row-header:
+  menu-add: Add Menu
+  menu-series-change: Rearrange
+modal:
+  change_status:
+    content: Change to this status?
+  option_detail:
+    series-change-option-group: Rearrange Option Group
+    option-group-desscription:
+      optional: 'Select options, full options '
+      required: Required options, at least {{minCount}} to at most {{maxCount}}
+    option-group-series-modal:
+      description: '''s options'
+    update-option-group-modal:
+      ok-button: Edit Option (Group)
+    add-option-button: Add Option Group
+    add-option-group-modal:
+      add-option-button: Add Option
+      ok-button: Add Option
+      option-header-title: Option
+      name:
+        label: Option Group Name
+      minCount:
+        label: Minimum Quantity
+      option-name:
+        place-holder-text: Name
+      title: Add Option (Group)
+      maxCount:
+        validator-min-text: Please enter a quantity of at least 1.
+        validator-text: Maximum quantity must be equal to or greater than minimum
+          quantity.
+        label: Maxium Quantity
+    option-update-button: Edit option (group)
+    description: '''s options'
+    option-series-modal:
+      description: '''s Options'
+    option_name: Option name
+    series-change-option: 'Rearrange Option '
+    title: Option Detail
+    delete-option-group-modal:
+      title: Delete Option Group
+      content: Would you like to delete the Option Group?
+      warning-content: 'Please note that all sub-options will be deleted when deleting
+        option groups. '
+    empty-text: Please add your options
+sell_status_placeholder: Status
+image: Image
+menu-group-series-change-modal:
+  title: Rearrange Menu Group
+menu-series-change-modal:
+  subtitle: '''s Menus'
+  title: Rearrange Menu
+status_update_content: Would you like to change the status?
+unit_price: Price
+sell_status: Product Availability
+menu-group-add-modal:
+  main-menu-set:
+    label-help-text: When set as the Main Menu, it will be displayed first on Newbie
+      Order.
+    label-text: Set as Main Menu
+  ok-button: Add Menu Group
+  menu-group-name:
+    validator-text: You can enter up to 30 characters.
+    label: Menu Group Name
+  title: Add Menu Group
+empty_shop: Select a site and a shop
+name: Menu Name
+image_upload_content: Would you like to upload the image?
+menu-delete-modal:
+  title: Delete menu
+  content: Would you like to delete the selected menu?
+excel-upload:
+  button: Download menu management excel
+  sub-title: Fill out the excel template and upload the file to create your menu list
+  title: Download excel file to register menu

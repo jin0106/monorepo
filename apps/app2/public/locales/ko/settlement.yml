@@ -1,0 +1,6 @@
+orders_count: '{{n}} 건'
+settlement_price: 정산 금액
+num_orders: 주문 건수
+detail: 상세 내역
+download_details: 상세 내역 다운로드
+empty_content: 정산 내역이 없습니다

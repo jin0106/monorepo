@@ -1,0 +1,82 @@
+start_node: Source
+cancel_note: 취소 내용
+order_number: 주문번호
+content: 취소하시겠습니까?
+empty_content: 등록된 주문이 없습니다
+empty:
+  content: 배달내역이 없습니다
+delivery_fee: 배달 요금
+order_status: 주문 현황
+open_cover: 적재함 열기
+order_products: 주문 상품
+manual_cancel: 주문 수동 취소
+look_up_destination: 목적지 조회
+modal:
+  cancel:
+    cta: 주문 취소하기
+    cargo_limit: 주문 수량이 많아 적재할 수 없어요
+    other: 직접 입력
+    cta_document: 배달취소
+    header_document: 문서배달을 취소하시겠습니까?
+    other_placeholder: 취소 사유를 입력하세요
+    customer_request: 고객 요청
+    err_no_cancel_reason: 주문번호나 취소사유가 없습니다
+    sold_out: 메뉴 재고가 부족해요
+    no_neubie: 배달가능한뉴비가없어요
+    cancel_order: 주문 취소
+  order_driving_log:
+    cta: 다운로드
+    title: 운영일지 다운로드
+    select_site: 사이트를 선택하세요
+  detail:
+    title: 주문 내역
+order_driving_log:
+  cta: 운영일지 다운로드
+  title: 운영일지
+  content: 운영일지를 받아보실 수 있어요
+delivery_food: 음식배달
+take_orders: 'Take orders '
+order_price: 주문 금액
+order_process: 주문 처리
+filter:
+  order_status: 주문 현황 전체
+end_node: 목적지
+order_date: 주문일시
+phone: 고객 연락처
+delivery_start: 배달 시작
+delivery_document: 문서배달
+card:
+  order_description_title: '{{count}} order items'
+  used_point: Points of Use
+  customer_phone_number: Customer contact
+  used_coupon: Coupons of Use
+  neubie_name: Neubie in charge
+  total_price: Total price
+  sender_info: Sender/Phone
+  origin: Source
+  destination: Destination
+  order_price: Order price
+  title: Order no. {{index}}
+  button:
+    order_accept: Accept order
+    cancellation_complete: Manual cancel
+    order_cancel: Cancel order
+    order_canceled_fail: Cancellation failed
+    start_delivery: Start
+    open_cargo: Open cargo
+  delivery_fee: Delivery fee
+  order_status:
+    delivering: Delivering
+    arrived: Arrived
+    preparing: ''
+    request_order: Order placed
+    request_cancel: Request cancel
+    delivered: Arrived
+    cancel_order: Canceled
+    loading_arrived: Neubie arrived
+    loading_start: Moving a neubie
+  cancel_reason: Reason of cancellation
+  assign_neubie: Neubie in charge
+  order_description_old_title: order items
+  user_note: Requests
+  receiver_info: Receiver/Phone

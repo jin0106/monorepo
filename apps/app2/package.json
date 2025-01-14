@@ -1,0 +1,41 @@
+{
+  "name": "@neubie/app2",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "gen-dev": "rm -rf src/api/generated && orval --config orval.dev.config.js",
+    "gen-staging": "rm -rf src/api/generated && orval --config orval.staging.config.js",
+    "build-icons": "node build-icon-script.js && node lazy-icon-script.js",
+    "prepare": "husky install && chmod +x .husky/pre-commit && chmod +x .husky/pre-push"
+
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@nx/next": "^20.3.0",
+    "@types/crypto-js": "^4.2.2",
+    "@types/geojson": "^7946.0.15",
+    "@types/navermaps": "^3.7.8",
+    "@types/react-beautiful-dnd": "^13.1.8",
+    "daisyui": "^2.52.0",
+    "next": "14.2.16",
+    "react": "18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "18.2.0",
+    "react-tooltip": "^5.28.0"
+  },
+  "nx": {
+    "name": "app2",
+    "projectType": "application",
+    "sourceRoot": "apps/app2"
+  }
+}

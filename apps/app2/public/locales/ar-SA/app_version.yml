@@ -1,0 +1,33 @@
+empty_version: There are no registered app version
+minimum_version: Minimum Version
+add_app_version: Add App Version
+android: Android
+update: Edit
+device_type: Software
+title: App Version Management
+latest_version: Latest Version
+alert:
+  latest_version_error: Latest version error
+  minimum_version_error: Minimum version error
+name: Name
+package_name: Package Name
+id: ID
+modal:
+  create:
+    add: Add
+    minimum_version: Minimum Version
+    latest_version: Latest Version
+    optional_update: Optional Update
+    mandatory_update: Mandatory Update
+    name: Name
+    package_name: Package Name
+    title: App Version Management
+  update:
+    add: Add
+    minimum_version: Minimum Version
+    latest_version: Latest Version
+    optional_update: Optional Update
+    mandatory_update: Mandatory Update
+    name: Name
+    package_name: Package Name
+    title: App Version Management

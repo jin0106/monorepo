@@ -1,0 +1,55 @@
+business_hours: Opening hours
+err_below_open_at: Please set time after open time
+main_image: Main Image
+create_shop: Register Shop
+empty_content: There are no registered stores
+open_status: Business status
+center_coordinates: Location
+account_manager: Shop settlement manager name
+account_manager_mobile: Contact person
+err_more_than_last_order_at: Please set time before the last order time
+next-day: Next day
+name: Shop name
+break_time: Break time
+update_shop: Shop Update
+modal:
+  add_image:
+    main_image_summary: '''s main image'
+    upload_image: Image upload
+    helper: 'Recommended Image Size: 750x468, Maximum File Size: 2MB'
+    placeholder: Add image files (jpg, png)
+    title: Add image
+register:
+  announce_placeholder: Write shop announcements/promotions
+  err_below_open_at: Please set time after open time
+  same-close-time: Please set it to a different time from the opening time.
+  break-start-time:
+    next-day: The break start time is set for the next day.
+  representative_name: Shop representative name
+  title: Create shop
+  business_registration_number: Business registration number
+  origin_label: Origins information
+  cta: Register Shop
+  neubie_go_node_number: Loading point
+  err_more_than_last_order_at: Please set time before the last order time
+  err_more_than_break_start_at: Please set time after break start time
+  break-end-time:
+    next-day: The break end time is set for the next day.
+  close-time:
+    next-day: Closing time set to next day.
+  last_order_at: Close at
+  payment_fees: Payment fees
+  err_more_than_break_end_at: Please set time before break start time
+  shop_name_placeholder: Shop mobile number
+  break_start_at: Break starts at
+  origin_label_placeholder: Please enter origins information
+  image_uploaded: Add image complete
+  announce: Announcements
+  postal_number: Postal Code
+  same-open-time: Please set it to a different time from the closing time.
+  min_order_amount: Min. order amount
+  site: Site
+  break_end_at: Break ends at
+  name: Shop name
+  delivery_tip: Delivery Tip
+  open_at: Open at
