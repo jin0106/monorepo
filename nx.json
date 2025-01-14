@@ -46,5 +46,8 @@
         "linter": "eslint"
       }
     }
+  },
+  "release": {
+    "projectsRelationship": "independent"
   }
 }
