@@ -17,6 +17,7 @@
     "@types/react-date-range": "^1.4.4",
     "@types/react-dom": "18.0.11",
     "@types/react-js-pagination": "^3.0.7",
+    "@vercel/remote-nx": "^2.0.0",
     "autoprefixer": "10.4.13",
     "eslint": "^9.10.0",
     "eslint-config-next": "^15.1.3",
