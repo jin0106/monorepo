@@ -1,0 +1,55 @@
+business_hours: 영업시간
+err_below_open_at: 영업 시작 시간 보다 이후 시간으로 설정해주세요
+main_image: 대표 이미지
+create_shop: 가게 등록
+empty_content: 등록된 가게가 없습니다
+open_status: 영업 상태
+center_coordinates: 적재 장소
+account_manager: 가게 정산 담당자 이름
+account_manager_mobile: 담당자 연락처
+err_more_than_last_order_at: 영업 종료 시간 보다 이전 시간으로 설정해주세요
+next-day: 익일
+name: 가게명
+break_time: 휴게시간
+update_shop: 가게 수정
+modal:
+  add_image:
+    main_image_summary: 의 대표이미지입니다
+    upload_image: 이미지 업로드
+    helper: '권장 이미지 사이즈: 750x468, 파일 용량: 최대 2MB'
+    placeholder: 이미지 파일(jpg, png)을 등록하세요
+    title: 이미지 등록
+register:
+  announce_placeholder: 가게알림(홍보) 내용을 작성해주세요
+  err_below_open_at: 영업 시작 시간 보다 이후 시간으로 설정해주세요
+  same-close-time: 영업 시작 시간과 다르게 설정해주세요.
+  break-start-time:
+    next-day: 휴게 시작 시간이 익일로 설정되었습니다.
+  representative_name: 대표명
+  title: 가게등록
+  business_registration_number: 사업자번호
+  origin_label: 원산지 정보
+  cta: 가게 등록
+  neubie_go_node_number: 적재 장소 설정
+  err_more_than_last_order_at: 영업 종료 시간 보다 이전 시간으로 설정해주세요
+  err_more_than_break_start_at: 휴게 시작 시간 보다 이후 시간으로 설정해주세요
+  break-end-time:
+    next-day: 휴게 종료 시간이 익일로 설정되었습니다.
+  close-time:
+    next-day: 영업 종료 시간이 익일로 설정되었습니다.
+  last_order_at: 영업 종료 시간
+  payment_fees: 결제 수수료율
+  err_more_than_break_end_at: 휴게 종료 시간 보다 이전 시간으로 설정해주세요
+  shop_name_placeholder: 가게 연락처
+  break_start_at: 휴게 시작 시간
+  origin_label_placeholder: 원산지 정보 내용을 작성해주세요
+  image_uploaded: 이미지 등록 완료
+  announce: 공지사항
+  postal_number: 우편번호
+  same-open-time: 영업 종료 시간과 다르게 설정해주세요.
+  min_order_amount: 최소 주문 금액
+  site: 사업장
+  break_end_at: 휴게 종료 시간
+  name: 가게명
+  delivery_tip: 배달팁
+  open_at: 영업 시작 시간

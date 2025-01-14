@@ -1,0 +1,31 @@
+password-reset:
+  text: Reset Password
+  modal:
+    button:
+      password-reset: Reset Password
+      authentication: Confirm
+    password-new-confirm:
+      placeholder: Confirm new password
+    password-new:
+      placeholder: Enter new password
+    mobile-number:
+      placeholder: Enter your phone number
+    id:
+      placeholder: Enter your ID
+    title:
+      password-reset: Reset Password
+      authentication: Identity Verification
+    password-helper-text: Your password must be at least 8 characters and include
+      a special character, a number, an uppercase letter, and a lowercase letter.
+    validation:
+      auth-failed: |-
+        You entered the incorrect information more than {{maxCount}} times.
+        Please contact customer service at {{csNumber}}.
+      password-format-invalid: Your password must be at least 8 characters and include
+        a special character, a number, an uppercase letter, and a lowercase letter.
+      password-confirm-failed: Password does not match.
+      id-mobile-number-not-equals: The ID or phone number you entered is incorrect..
+        ({{count}}/{{maxCount}})
+password-placeholder: 비밀번호를 입력해주세요
+login: 로그인
+title: Admin 로그인

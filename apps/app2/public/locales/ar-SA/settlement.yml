@@ -1,0 +1,6 @@
+orders_count: '{{n}} orders'
+settlement_price: Settled amount
+num_orders: Order counts
+detail: Detailed history
+download_details: Download history
+empty_content: There is no settlement history
