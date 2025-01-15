@@ -49,5 +49,13 @@
   },
   "release": {
     "projectsRelationship": "independent"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test"]
+      }
+    }
   }
 }
