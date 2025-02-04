@@ -1,0 +1,40 @@
+name: Merge Dev to Staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # staging 브랜치가 존재한다면 삭제
+  delete-staging-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+      - name: Delete an exiting staging branch
+        run: |
+          if [ -n "$(git ls-remote --heads origin staging)" ]; then
+            git fetch --prune
+            git push origin --delete staging
+          fi
+            echo "staging branch doesn't exist"
+  
+
+  # dev 브랜치에서 staging 브랜치 생성 및 staging 브랜치 push
+  checkout-dev-versioning:
+    if: ${{ success() }}
+    needs: delete-staging-branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+
+      - name: Commit Dev and Checkout Staging
+        run : |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git checkout -b staging origin/dev
+          git push --set-upstream origin staging

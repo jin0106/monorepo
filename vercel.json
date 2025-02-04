@@ -6,5 +6,10 @@
       "neom": false,
       "neom-staging": false
     }
+  },
+  "build": {
+    "env": {
+      "NX_CACHE_DIRECTORY": ".nx/cache"
+    }
   }
 }

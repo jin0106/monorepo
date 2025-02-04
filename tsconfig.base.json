@@ -1,31 +1,31 @@
 {
   "compilerOptions": {
-    "allowJs": false,
-    "allowSyntheticDefaultImports": true,
-    "composite": true,
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "emitDecoratorMetadata": false,
-    "esModuleInterop": true,
-    "experimentalDecorators": false,
-    "forceConsistentCasingInFileNames": true,
-    "importHelpers": true,
-    "incremental": true,
-    "isolatedModules": true,
-    "lib": ["es2022"],
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "pretty": true,
-    "removeComments": false,
-    "resolveJsonModule": false,
-    "skipDefaultLibCheck": false,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
     "skipLibCheck": true,
-    "sourceMap": false,
     "strict": true,
-    "target": "es2022",
-  }
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/icons/*": ["./public/icons/*"],
+      "@/images/*": ["./public/images/*"],
+      "@/*": ["./src/*"],
+      "@/rawIcons/*": ["./public/rawIcons/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
