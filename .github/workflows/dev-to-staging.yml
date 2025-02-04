@@ -3,12 +3,13 @@ name: Merge Dev to Staging
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   # staging 브랜치가 존재한다면 삭제
   delete-staging-branch:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
