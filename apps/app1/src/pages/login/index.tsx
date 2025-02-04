@@ -59,7 +59,7 @@ const PageLoginContent = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-base-200">
       <section className="card w-full max-w-2xl rounded-xl bg-base-100 p-20 shadow-xl">
-        <p>cache test </p>
+        <p>app1 </p>
         <h1 className="mb-2 text-center text-2xl font-semibold">{t('login:title')}</h1>
         <div>{process.env.PLATFORM_ENV}</div>
         <form ref={formRef} className="form-control flex  gap-2" onSubmit={onSubmit}>
