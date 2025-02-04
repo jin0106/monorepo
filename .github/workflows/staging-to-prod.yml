@@ -1,0 +1,72 @@
+name: Merge Staging to Prod & Dev
+
+# Sprint Number 입력
+on:
+  workflow_dispatch:
+    inputs:
+      sprint-number:
+        type: string
+        description: sprint number
+        required: true
+
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  # staging 브랜치를 main 브랜치에 머지하는 PR 생성 후 자동 머지
+  merge-staging-to-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+
+      - name: Create Pull Request
+        run: gh pr create --title "🚀 Sprint ${{ github.event.inputs.sprint-number }}" --body "Sprint ${{ github.event.inputs.sprint-number }}" --assignee @me --base main
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Merge Pull Request
+        run: gh pr merge --merge ${{ github.event.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+  # staging 브랜치를 dev 브랜치에 머지하는 PR 생성 후 자동 머지
+  # staging 과 dev 브랜치간 차이가 없을시 해당 작업 스킵
+  merge-staging-to-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+          fetch-depth: 0
+
+      - name: Check Differences Between Staging and Dev
+        run: |
+          git fetch origin staging
+          if git diff --quiet origin/dev origin/staging; then
+            echo "No changes detected between staging and dev. Skipping PR creation."
+            echo "should_skip=true" >> $GITHUB_ENV
+          else
+            echo "Changes detected. Proceeding with PR creation."
+            echo "should_skip=false" >> $GITHUB_ENV
+          fi
+
+      - name: Create Pull Request
+        if: env.should_skip == 'false'
+        run: gh pr create --title '🔀 Sprint ${{ github.event.inputs.sprint-number }}, staging -> dev  ${{ github.event.inputs.sprint-number }}" --body "Sprint ${{ github.event.inputs.sprint-number }}" --assignee @me --base dev
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Merge Pull Request
+        if: env.should_skip == 'false'
+        run: gh pr merge --merge ${{ github.event.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+
+
