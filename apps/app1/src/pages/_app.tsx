@@ -68,7 +68,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
                 <ReactQueryDevtoolsProduction position="bottom-right" />
               </React.Suspense>
             )}
-            <div>staging1</div>
+            <div>staging2</div>
             <Layout>
               <Component {...pageProps} />
             </Layout>
