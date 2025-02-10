@@ -1,7 +1,6 @@
 name: Deploy to Vercel
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   workflow_dispatch:
@@ -27,15 +26,24 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: ${{ fromJson('["app1", "app2"]') }}
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
+
+      - name: Set up deployment environment
+        id: setup_env
+        run: |
+          apps=()
+          if [ "${{ github.event.inputs.app1 }}" == "true" ]; then
+            apps+=("app1")
+          fi
+          if [ "${{ github.event.inputs.app2 }}" == "true" ]; then
+            apps+=("app2")
+          fi
+          echo "selected_apps=${apps[@]}" >> $GITHUB_ENV
 
       - name: Pull Vercel Environment Information
         run: |
@@ -45,18 +53,30 @@ jobs:
             vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
           fi
 
-      - name: Build Project Artifacts
+      - name: Build and Deploy for Selected Apps
         run: |
-          if [ "${{ github.event.inputs.environment }}" == "main" ]; then
-            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-          else
-            vercel build --token=${{ secrets.VERCEL_TOKEN }}
-          fi
+          for app in ${{ env.selected_apps }}; do
+            echo "Deploying $app"
 
-      - name: Deploy Project Artifacts to Vercel
-        run: |
-          if [ "${{ github.event.inputs.environment }}" == "main" ]; then
-            vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-          else
-            vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-          fi
+            # Set Project ID based on app
+            if [ "$app" == "app1" ]; then
+              VERCEL_PROJECT_ID="${{ secrets.VERCEL_PROJECT_ID_APP1 }}"
+            elif [ "$app" == "app2" ]; then
+              VERCEL_PROJECT_ID="${{ secrets.VERCEL_PROJECT_ID_APP2 }}"
+            fi
+            echo "Using Project ID: $VERCEL_PROJECT_ID"
+
+            # Build Project Artifacts
+            if [ "${{ github.event.inputs.environment }}" == "main" ]; then
+              vercel build --prod --token=${{ secrets.VERCEL_TOKEN }} --project-id=$VERCEL_PROJECT_ID
+            else
+              vercel build --token=${{ secrets.VERCEL_TOKEN }} --project-id=$VERCEL_PROJECT_ID
+            fi
+
+            # Deploy Project Artifacts to Vercel
+            if [ "${{ github.event.inputs.environment }}" == "main" ]; then
+              vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} --project-id=$VERCEL_PROJECT_ID
+            else
+              vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --project-id=$VERCEL_PROJECT_ID
+            fi
+          done
