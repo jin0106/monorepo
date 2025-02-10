@@ -1,4 +1,11 @@
 {
+  "parallel": 2,
+  "cacheDirectory": "tmp/my-nx-cache",
+  "targetDefaults": {
+    "@nx/next": {
+      "cache": true
+    }
+  },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
