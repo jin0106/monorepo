@@ -42,7 +42,7 @@ jobs:
         run: npm install
 
       - name: Deploy to Vercel
-        if: contains(inputs.apps, matrix.app)
+        if: ${{ github.event.inputs[matrix.app] == 'true' }}
         run: |
           PROJECT_SECRET_NAME=$(echo "${{ matrix.app }}" | tr '[:lower:]' '[:upper:]')_PROJECT_ID
           vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --scope your-vercel-team --cwd=apps/${{ matrix.app }}
