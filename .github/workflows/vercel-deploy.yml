@@ -38,6 +38,7 @@ jobs:
 
       - name: Build and Deploy for Selected Apps
         run: |
+          # Define selected apps dynamically
           apps=()
           if [ "${{ github.event.inputs.app1 }}" == "true" ]; then
             apps+=("app1")
@@ -46,19 +47,21 @@ jobs:
             apps+=("app2")
           fi
           
+          # Loop through each selected app
           for app in "${apps[@]}"; do
             echo "Deploying $app"
           
             # Build Project Artifacts
             if [ "${{ github.event.inputs.environment }}" == "main" ]; then
-              vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+              vercel build --prod --token=${{ secrets.VERCEL_TOKEN }} --cwd=apps/$app
             else
-              vercel build --token=${{ secrets.VERCEL_TOKEN }}
+              vercel build --token=${{ secrets.VERCEL_TOKEN }} --cwd=apps/$app
             fi
           
             # Deploy Project Artifacts to Vercel
             if [ "${{ github.event.inputs.environment }}" == "main" ]; then
-              vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+              vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} --cwd=apps/$app
             else
-              vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+              vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --cwd=apps/$app
             fi
+          done
