@@ -61,3 +61,5 @@ jobs:
           else
             vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
           fi
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets[format('VERCEL_PROJECT_ID_{0}', github.event.inputs.app)]}}
