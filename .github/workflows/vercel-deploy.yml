@@ -60,9 +60,9 @@ jobs:
 
             # Set Project ID based on app
             if [ "$app" == "app1" ]; then
-              VERCEL_PROJECT_ID="${{ secrets.VERCEL_PROJECT_ID_APP1 }}"
+              export VERCEL_PROJECT_ID="${{ secrets.VERCEL_PROJECT_ID_APP1 }}"
             elif [ "$app" == "app2" ]; then
-              VERCEL_PROJECT_ID="${{ secrets.VERCEL_PROJECT_ID_APP2 }}"
+              export VERCEL_PROJECT_ID="${{ secrets.VERCEL_PROJECT_ID_APP2 }}"
             fi
             echo "Using Project ID: $VERCEL_PROJECT_ID"
 
