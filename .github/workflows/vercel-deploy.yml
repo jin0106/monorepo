@@ -24,9 +24,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: ${{ fromJson('["app1", "app2"]') }}
 
     steps:
       - uses: actions/checkout@v2
