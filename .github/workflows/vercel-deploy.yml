@@ -36,6 +36,7 @@ jobs:
 
       - name: Pull Vercel Environment Information
         run: |
+          echo aa : ${{ secrets[format('VERCEL_PROJECT_ID_{0}', github.event.inputs.apps)]}}
           if [ "${{ github.event.inputs.environment }}" == "main" ]; then
             vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           else
