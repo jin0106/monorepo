@@ -29,22 +29,23 @@ jobs:
         app: ${{ fromJson('["app1", "app2"]') }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: "npm"
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
 
-      - name: Install dependencies
-        run: npm install
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy to Vercel
-        if: ${{ github.event.inputs[matrix.app] == 'true' }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
         run: |
-          vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --scope your-vercel-team --cwd=apps/${{ matrix.app }}
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets[format('{0}_PROJECT_ID', matrix.app)] }}
+          if [ "${{ github.event.inputs.environment }}" == "main" ]; then
+            vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+    
+
