@@ -1,0 +1,50 @@
+name: Deploy to Vercel
+
+on:
+  workflow_dispatch:
+    inputs:
+      app1:
+        description: "Select app1"
+        required: false
+        type: boolean
+      app2:
+        description: "Select app2"
+        required: false
+        type: boolean
+
+      environment:
+        description: "Select deployment environment"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: ${{ fromJson('["app1", "app2"]') }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Vercel
+        if: contains(inputs.apps, matrix.app)
+        run: |
+          vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --scope your-vercel-team --cwd=apps/${{ matrix.app }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets[matrix.app] }}
