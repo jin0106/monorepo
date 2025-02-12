@@ -28,7 +28,7 @@ jobs:
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": "저장소: *뉴비고* \n배포 환경: *dev*\n 브랜치: *wip (375f794)*"
+        "text": "앱: *뉴비고* \n배포 환경: *dev*\n 배포 결과: *wip (375f794)*"
       }
     }
   ]}
