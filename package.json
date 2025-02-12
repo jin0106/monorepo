@@ -1,8 +1,10 @@
 {
   "name": "@neubie/source",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install && chmod +x .husky/pre-commit && chmod +x .husky/pre-push"
+  },
   "private": true,
   "devDependencies": {
     "@eslint/js": "^9.8.0",
