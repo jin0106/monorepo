@@ -20,3 +20,5 @@ fi
 
 # husky 스크립트를 쉽게 제공해주는  _/husky.sh 스크립트를 실행합니다.
 . "$(dirname -- "$0")/_/husky.sh"
+
+yarn lint-staged
