@@ -23,6 +23,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set App Name for Slack Notification
+        id: set-slack-title
+        run: |
+          if [ "${{ github.event.inputs.app }}" == "APP1" ]; then
+            echo "SLACK_TITLE_NAME=뉴비고" >> $GITHUB_ENV
+          else
+            echo "SLACK_TITLE_NAME=뉴비오더" >> $GITHUB_ENV
+          fi
+
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
@@ -50,3 +59,16 @@ jobs:
           else
             vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
           fi
+
+      - name: Slack Notification
+        if: always()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_ICON_EMOJI: ':kirby-type:'
+          SLACK_USERNAME: platform_frontend_app
+          SLACK_TITLE: ":rocket: 프론트엔드 배포 시작 알림"
+          SLACK_MESSAGE: "배포 환경 : ${{ github.ref_name }}"
+          SLACK_COLOR: ${{ job.status }}
+          
+      
