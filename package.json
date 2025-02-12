@@ -1,6 +1,6 @@
 {
   "name": "@neubie/source",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "prepare": "husky install && chmod +x .husky/pre-commit && chmod +x .husky/pre-push"
