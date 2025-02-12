@@ -15,6 +15,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_CUSTOM_PAYLOAD: '{"text": "Hello, World!"}'
+          SLACK_CUSTOM_PAYLOAD: '{"text": "배포 환경 ${{ github.ref_name }}", "title": ":rocket: 프론트엔드 배포 알림"}'
+          SLACK_COLOR: ${{ job.status }}
 
 
