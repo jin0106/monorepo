@@ -4,17 +4,18 @@ branch="$(git rev-parse --abbrev-ref HEAD)"
 
 # branch가 main 이라면 문구를 노출 시키며 종료
 if [ "$branch" = "main" ]; then
-  echo "You can't commit directly to main branch"
+  echo "You can't push directly to main branch"
   exit 1
 fi
 
+# branch가 dev 이라면 문구를 노출 시키며 종료
 if [ "$branch" = "dev" ]; then
-  echo "You can't commit directly to dev branch"
+  echo "You can't push directly to dev branch"
   exit 1
 fi
 
 if [ "$branch" = "staging" ]; then
-  echo "You can't commit directly to staging branch"
+  echo "You can't push directly to staging branch"
   exit 1
 fi
 
