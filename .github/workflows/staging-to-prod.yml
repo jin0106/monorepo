@@ -52,7 +52,12 @@ jobs:
             echo "should_skip=false" >> $GITHUB_ENV
           fi
 
-
+      - name: Create Pull Request
+        if: env.should_skip == 'false'
+        run: |
+          gh pr create --title "🔀 Sprint ${{ github.event.inputs.sprint-number }}, staging -> dev" --body "Sprint ${{ github.event.inputs.sprint-number }}" --assignee @me --base dev --head staging
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 
 
