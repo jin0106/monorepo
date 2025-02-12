@@ -51,7 +51,7 @@ jobs:
           SLACK_CUSTOM_PAYLOAD: '{
             "attachments": [
               {
-                "color": "${{ env.SLACK_COLOR }}",
+                "color": "success",
                 "blocks": [
                   {
                     "type": "section",
