@@ -1,0 +1,20 @@
+name: Slack Test
+on:
+  workflow_dispatch:
+    inputs:
+
+jobs:
+  slack:
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: Slack Notification
+        if: always()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+
+          SLACK_CUSTOM_PAYLOAD: '{"text": "Hello, World!"}'
+
+
