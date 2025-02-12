@@ -27,7 +27,7 @@ jobs:
       - name: Set App Name for Slack Notification
         id: set-slack-title
         run: |
-          if [ "${{ github.event.inputs.app }}" == "APP1" ]; then
+          if [ "${{ github.event.inputs.a pp }}" == "APP1" ]; then
             echo "APP_NAME=뉴비고" >> $GITHUB_ENV
           else
             echo "APP_NAME=뉴비오더" >> $GITHUB_ENV
