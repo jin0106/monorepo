@@ -31,7 +31,7 @@ jobs:
         "text": "저장소: *뉴비고* \n배포 환경: *dev*\n 브랜치: *wip (375f794)*"
       }
     }
-  ]
+  ]}
 '
           SLACK_COLOR: ${{ job.status }}
 
