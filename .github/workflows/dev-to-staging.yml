@@ -3,10 +3,10 @@ name: Merge Dev to Staging
 # 버전 minor와 major 중 어떤것을 올릴것인지  선택 가능
 on:
   workflow_dispatch:
-  
+
 permissions:
   contents: write  # Git push, delete 등을 수행할 권한 부여
-  
+
 jobs:
   # staging 브랜치가 존재한다면 삭제
   delete-staging-branch:
@@ -37,6 +37,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: dev
+
+      - name: Get package version
+        id: package-version-old
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
 
       - name: versioning
         run: |
