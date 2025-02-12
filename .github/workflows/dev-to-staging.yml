@@ -1,10 +1,8 @@
 name: Merge Dev to Staging
 
+# 버전 minor와 major 중 어떤것을 올릴것인지  선택 가능
 on:
   workflow_dispatch:
-
-permissions:
-  contents: write
 
 jobs:
   # staging 브랜치가 존재한다면 삭제
@@ -15,6 +13,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: dev
+
       - name: Delete an exiting staging branch
         run: |
           if [ -n "$(git ls-remote --heads origin staging)" ]; then
@@ -24,6 +23,7 @@ jobs:
             echo "staging branch doesn't exist"
   
 
+  # dev 브랜치로 checkout 및 버전 변경 후 commit
   # dev 브랜치에서 staging 브랜치 생성 및 staging 브랜치 push
   checkout-dev-versioning:
     if: ${{ success() }}
@@ -35,9 +35,20 @@ jobs:
         with:
           ref: dev
 
+      - name: versioning
+        run: |
+          npm version minor --no-git-tag-version --no-workspaces-update
+          npm version patch --no-git-tag-version --no-workspaces-update
+
+      - name: Get package version
+        id: package-version-new
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
       - name: Commit Dev and Checkout Staging
         run : |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git checkout -b staging origin/dev
+          git add .
+          git commit -m "Version v${{ steps.package-version-old.outputs.current-version }} to v${{ steps.package-version-new.outputs.current-version }}"
+          git checkout -b staging
           git push --set-upstream origin staging
