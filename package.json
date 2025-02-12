@@ -5,6 +5,17 @@
   "scripts": {
     "prepare": "husky install && chmod +x .husky/pre-commit && chmod +x .husky/pre-push"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "private": true,
   "devDependencies": {
     "@eslint/js": "^9.8.0",
