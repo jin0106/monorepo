@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write  # Git push, delete 등을 수행할 권한 부여
 
 jobs:
   # staging 브랜치가 존재한다면 삭제
