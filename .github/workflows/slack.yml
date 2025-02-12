@@ -32,17 +32,6 @@ jobs:
           fi
 
 
-      - name: Set Slack Color
-        id: slack_color
-        run: |
-          if [ "${{ job.status }}" == "success" ]; then
-          echo "SLACK_COLOR=good" >> $GITHUB_ENV
-          elif [ "${{ job.status }}" == "failure" ]; then
-          echo "SLACK_COLOR=danger" >> $GITHUB_ENV
-          else
-          echo "SLACK_COLOR=warning" >> $GITHUB_ENV
-          fi
-
       - name: Slack Notification
         if: always()
         uses: rtCamp/action-slack-notify@v2
@@ -51,7 +40,6 @@ jobs:
           SLACK_CUSTOM_PAYLOAD: '{
             "attachments": [
               {
-                "color": "success",
                 "blocks": [
                   {
                     "type": "section",
@@ -64,7 +52,7 @@ jobs:
                     "type": "section",
                     "text": {
                       "type": "mrkdwn",
-                      "text": "앱: *${{ github.event.inputs.app }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{ steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
+                      "text": "앱: *${{ env.APP_NAME }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{ steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
                     }
                   }
                 ]
