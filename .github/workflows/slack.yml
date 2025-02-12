@@ -49,25 +49,25 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_CUSTOM_PAYLOAD: '{
-          "attachments": [
-            {
-              "color": ${{ env.SLACK_COLOR }}
-                                  "blocks": [
-                                    {
-                                      "type": "section",
-                                      "text": {
-                                        "type": "mrkdwn",
-                                        "text": "🚀 프론트엔드 배포 알림"
-                                      }
-                                    },
-                                    {
-                                      "type": "section",
-                                      "text": {
-                                        "type": "mrkdwn",
-                                        "text": "앱: *${{ github.event.inputs.app }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{ steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
-                                      }
-                                    }
-                                  ]
-          }
-          ]
-        }'
+            "attachments": [
+              {
+                "color": "${{ env.SLACK_COLOR }}",
+                "blocks": [
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "🚀 프론트엔드 배포 알림"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "앱: *${{ github.event.inputs.app }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{ steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
+                    }
+                  }
+                ]
+              }
+            ]
+          }'
