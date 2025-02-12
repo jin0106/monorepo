@@ -1,6 +1,5 @@
 name: Merge Staging to Prod & Dev
 
-# Sprint Number 입력
 on:
   workflow_dispatch:
     inputs:
@@ -24,18 +23,48 @@ jobs:
         with:
           ref: staging
 
+
       - name: Create Pull Request
-        run: gh pr create --title "🚀 Sprint ${{ github.event.inputs.sprint-number }}" --body "Sprint ${{ github.event.inputs.sprint-number }}" --assignee @me --base main
+        run: |
+          gh pr create --title "🚀 Sprint ${{ github.event.inputs.sprint-number }}" --body "Sprint ${{ github.event.inputs.sprint-number }}" --assignee @me --base main --head staging
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Wait for PR to be created
+        run: |
+          echo "Waiting for PR creation to propagate..."
+          sleep 1  # 3초 기다려 PR이 생성되도록 함
+
+      - name: Get PR Number
+        id: get-pr-number
+        run: |
+          PR_NUMBER=$(gh pr list --state open --base main --head staging --json number -q '.[0].number')
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Merge Pull Request
-        run: gh pr merge --merge ${{ github.event.number }}
+        run: |
+          if [ -z "$PR_NUMBER" ]; then
+           echo "PR not found. Exiting."
+           exit 1
+          fi
+          
+          PR_STATUS=$(gh pr view $PR_NUMBER --json state -q ".state")
+          
+          echo gh pr view $PR_NUMBER --json state -q ".state"
+          
+          
+          if [ "$PR_STATUS" == "OPEN" ]; then
+            gh pr merge --merge $PR_NUMBER
+            echo "PR $PR_NUMBER merged successfully."
+          else
+            echo "PR $PR_NUMBER is not open or already merged."
+          fi
+
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-  # staging 브랜치를 dev 브랜치에 머지하는 PR 생성 후 자동 머지
-  # staging 과 dev 브랜치간 차이가 없을시 해당 작업 스킵
   merge-staging-to-dev:
     runs-on: ubuntu-latest
     steps:
@@ -56,15 +85,45 @@ jobs:
             echo "should_skip=false" >> $GITHUB_ENV
           fi
 
+
       - name: Create Pull Request
         if: env.should_skip == 'false'
-        run: gh pr create --title '🔀 Sprint ${{ github.event.inputs.sprint-number }}, staging -> dev  ${{ github.event.inputs.sprint-number }}" --body "Sprint ${{ github.event.inputs.sprint-number }}" --assignee @me --base dev
+        run: |
+          gh pr create --title "🔀 Sprint ${{ github.event.inputs.sprint-number }}, staging -> dev" --body "Sprint ${{ github.event.inputs.sprint-number }}" --assignee @me --base dev --head staging
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
+      - name: Wait for PR to be created
+        run: |
+          echo "Waiting for PR creation to propagate..."
+          sleep 1  # 3초 기다려 PR이 생성되도록 함
+
+      - name: Get PR Number
+        id: get-pr-number
+        run: |
+          PR_DEV_NUMBER=$(gh pr list --state open --base dev --head staging --json number -q '.[0].number')
+          echo "PR_DEV_NUMBER=$PR_DEV_NUMBER" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+
       - name: Merge Pull Request
         if: env.should_skip == 'false'
-        run: gh pr merge --merge ${{ github.event.number }}
+        run: |
+          if [ -z "$PR_DEV_NUMBER" ]; then
+           echo "PR not found. Exiting."
+           exit 1
+          fi
+          
+          PR_DEV_STATUS=$(gh pr view $PR_DEV_NUMBER --json state -q ".state")
+          
+          
+          if [ "$PR_DEV_STATUS" == "OPEN" ]; then
+            gh pr merge --merge $PR_DEV_NUMBER
+            echo "PR $PR_DEV_NUMBER merged successfully."
+          else
+            echo "PR $PR_DEV_NUMBER is already merged or closed."
+          fi
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
