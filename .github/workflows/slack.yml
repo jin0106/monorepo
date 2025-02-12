@@ -2,6 +2,14 @@ name: Slack Test
 on:
   workflow_dispatch:
     inputs:
+      app:
+        description: "Select app to be deployed"
+        required: true
+        default: "APP1"
+        type: choice
+        options:
+          - APP1
+          - APP2
 
 jobs:
   slack:
@@ -15,24 +23,22 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_CUSTOM_PAYLOAD: '{
-  "blocks": [
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "*🚀 프론트엔드 배포 시작 알림*"
-      }
-    },
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "앱: *뉴비고* \n배포 환경: *dev*\n 배포 결과: *wip (375f794)*"
-      }
-    }
-  ]}
-'
           SLACK_COLOR: ${{ job.status }}
-
-
+          SLACK_CUSTOM_PAYLOAD: '{
+       "blocks": [
+         {
+           "type": "section",
+           "text": {
+             "type": "mrkdwn",
+             "text": "🚀 프론트엔드 배포 알림"
+           }
+         },
+         {
+           "type": "section",
+           "text": {
+             "type": "mrkdwn",
+             "text": "앱: *${{ github.event.inputs.app }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{  steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
+           }
+         }
+       ]}
+     '
