@@ -17,6 +17,11 @@ jobs:
 
 
     steps:
+      - name: Get package current version
+        id: package-current-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+
       - name: Set App Name for Slack Notification
         id: set-slack-title
         run: |
@@ -31,22 +36,26 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: ${{ job.status == 'success' && 'good' || job.status == 'failure' && 'danger' || 'warning' }}
           SLACK_CUSTOM_PAYLOAD: '{
-       "blocks": [
-         {
-           "type": "section",
-           "text": {
-             "type": "mrkdwn",
-             "text": "🚀 프론트엔드 배포 알림"
-           }
-         },
-         {
-           "type": "section",
-           "text": {
-             "type": "mrkdwn",
-             "text": "앱: *${{ env.APP_NAME }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{  steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
-           }
-         }
-       ]}
-     '
+          "attachments": [
+            {
+              "color": "${{ job.status }}",
+                                  "blocks": [
+                                    {
+                                      "type": "section",
+                                      "text": {
+                                        "type": "mrkdwn",
+                                        "text": "🚀 프론트엔드 배포 알림"
+                                      }
+                                    },
+                                    {
+                                      "type": "section",
+                                      "text": {
+                                        "type": "mrkdwn",
+                                        "text": "앱: *${{ github.event.inputs.app }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{ steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
+                                      }
+                                    }
+                                  ]
+          }
+          ]
+        }'
