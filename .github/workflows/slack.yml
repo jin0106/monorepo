@@ -41,7 +41,7 @@ jobs:
           SLACK_CUSTOM_PAYLOAD: '{
             "attachments": [
               {
-                "color": "red",
+                "color": "good",
                 "blocks": [
                   {
                     "type": "section",
