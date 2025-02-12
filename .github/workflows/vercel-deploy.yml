@@ -37,6 +37,7 @@ jobs:
 
       - name: Build Project Artifacts
         run: |
+          echo "${{ secretes.VERCEL_ORG_ID }}"
           if [ "${{ github.ref_name }}" == "main" ]; then
             vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
           else
