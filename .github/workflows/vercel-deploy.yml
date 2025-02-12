@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       app:
-        description: "Select app"
+        description: "Select app to be deployed"
         required: true
         default: "app1"
         type: choice
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets[format('VERCEL_PROJECT_ID_{0}', github.event.inputs.app)]}}
+      VERCEL_PROJECT_ID: ${{ secrets[format('VERCEL_PROJECT_ ID_{0}', github.event.inputs.app)]}}
 
     steps:
       - uses: actions/checkout@v2
