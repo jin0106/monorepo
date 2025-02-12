@@ -17,13 +17,21 @@ jobs:
 
 
     steps:
+      - name: Set App Name for Slack Notification
+        id: set-slack-title
+        run: |
+          if [ "${{ github.event.inputs.app }}" == "APP1" ]; then
+            echo "APP_NAME=뉴비고" >> $GITHUB_ENV
+          else
+            echo "APP_NAME=뉴비오더" >> $GITHUB_ENV
+          fi
 
       - name: Slack Notification
         if: always()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: ${{ job.status == 'success' && 'good' || job.status == 'failure' && 'danger' || 'warning' }}
           SLACK_CUSTOM_PAYLOAD: '{
        "blocks": [
          {
@@ -37,7 +45,7 @@ jobs:
            "type": "section",
            "text": {
              "type": "mrkdwn",
-             "text": "앱: *${{ github.event.inputs.app }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{  steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
+             "text": "앱: *${{ env.APP_NAME }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{  steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
            }
          }
        ]}
