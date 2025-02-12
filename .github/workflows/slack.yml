@@ -15,7 +15,34 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_CUSTOM_PAYLOAD: '{"text": "배포 환경 ${{ github.ref_name }}", "title": ":rocket: 프론트엔드 배포 알림"}'
+          SLACK_CUSTOM_PAYLOAD: '{
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*🚀 프론트 배포 시작 알림*"
+      }
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*앱이름:* 뉴비고"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*배포 환경:* dev"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*브랜치:* wip (375f794)"
+        }
+      ]
+    }
+  ]
+}'
           SLACK_COLOR: ${{ job.status }}
 
 
