@@ -2,9 +2,6 @@
   "name": "@neubie/source",
   "version": "0.40.3",
   "license": "MIT",
-  "scripts": {
-    "prepare": "husky install && chmod +x .husky/pre-commit && chmod +x .husky/pre-push"
-  },
   "private": true,
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.6",
