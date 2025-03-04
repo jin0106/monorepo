@@ -1,4 +1,4 @@
-name: Merge Staging to Prod & Dev
+name: Staging -> Main, Dev
 
 on:
   workflow_dispatch:
