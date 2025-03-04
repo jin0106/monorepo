@@ -56,7 +56,7 @@
     "@types/lodash": "^4.17.13",
     "@types/node": "18.16.9",
     "@types/react": "18.0.28",
-    "@types/react-date-range": "^1.4.4",
+    "@types/react-date-range": "1.4.9",
     "@types/react-dom": "^18.0.11",
     "@types/react-js-pagination": "^3.0.7",
     "@types/uuid": "^10.0.0",
@@ -94,8 +94,5 @@
     "packages/**",
     "apps/**"
   ],
-  "resolutions": {
-    "strip-ansi": "6.0.1"
-  },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
