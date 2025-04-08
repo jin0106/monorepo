@@ -70,13 +70,14 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: ${{ job.status }}
           SLACK_CUSTOM_PAYLOAD: '{
         "blocks": [
           {
             "type": "section",
             "text": {
               "type": "mrkdwn",
-              "text": "*🚀 프론트엔드 배포 알림*"
+              "text": "🚀 프론트엔드 배포 알림"
             }
           },
           {
@@ -88,4 +89,3 @@ jobs:
           }
         ]}
       '
-          SLACK_COLOR: ${{ job.status }}

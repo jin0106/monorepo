@@ -2,6 +2,14 @@ name: Slack Test
 on:
   workflow_dispatch:
     inputs:
+      app:
+        description: "Select app to be deployed"
+        required: true
+        default: "APP1"
+        type: choice
+        options:
+          - APP1
+          - APP2
 
 jobs:
   slack:
@@ -9,6 +17,21 @@ jobs:
 
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get package current version
+        id: package-current-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      - name: Set App Name for Slack Notification
+        id: set-slack-title
+        run: |
+          if [ "${{ github.event.inputs.app }}" == "APP1" ]; then
+            echo "APP_NAME=뉴비고" >> $GITHUB_ENV
+          else
+            echo "APP_NAME=뉴비오더" >> $GITHUB_ENV
+          fi
 
       - name: Slack Notification
         if: always()
@@ -16,23 +39,24 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_CUSTOM_PAYLOAD: '{
-  "blocks": [
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "*🚀 프론트엔드 배포 시작 알림*"
-      }
-    },
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "앱: *뉴비고* \n배포 환경: *dev*\n 배포 결과: *wip (375f794)*"
-      }
-    }
-  ]}
-'
-          SLACK_COLOR: ${{ job.status }}
-
-
+            "attachments": [
+              {
+                "blocks": [
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "🚀 프론트엔드 배포 알림"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "앱: *${{ env.APP_NAME }}* \n배포 환경: *${{ github.ref_name }}*\n버전: *v${{ steps.package-current-version.outputs.current-version }}*\n 배포 결과: *${{ job.status }}*"
+                    }
+                  }
+                ]
+              }
+            ]
+          }'
