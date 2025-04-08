@@ -1,46 +1,43 @@
 name: Dev -> Staging
 
-# 버전 minor와 major 중 어떤것을 올릴것인지  선택 가능
 on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Git push, delete 등을 수행할 권한 부여
+  contents: write
 
 jobs:
-  # staging 브랜치가 존재한다면 삭제
-  delete-staging-branch:
+  create-staging:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: dev
-
-      - name: Delete an exiting staging branch
-        run: |
-          if [ -n "$(git ls-remote --heads origin staging)" ]; then
-            git fetch --prune
-            git push origin --delete staging
-          fi
-            echo "staging branch doesn't exist"
-  
-
-  # dev 브랜치로 checkout 및 버전 변경 후 commit
-  # dev 브랜치에서 staging 브랜치 생성 및 staging 브랜치 push
-  checkout-staging-versioning:
-    if: ${{ success() }}
-    needs: delete-staging-branch
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout dev branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: dev
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit Dev and Checkout Staging
-        run : |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git push --set-upstream origin staging
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Delete existing staging branch (local and remote)
+        run: |
+          # 원격 staging 브랜치 존재 여부 확인 및 삭제
+          if git ls-remote --heads origin staging | grep staging; then
+            echo "Deleting existing remote staging branch..."
+            git push origin --delete staging
+          else
+            echo "Remote staging branch does not exist"
+          fi
+
+      - name: Create and push new staging branch
+        run: |
+          # dev 브랜치에서 새로운 staging 브랜치 생성
+          echo "Creating new staging branch from dev..."
+          git checkout -b staging
+          
+          # 새로운 staging 브랜치를 원격에 push
+          echo "Pushing new staging branch..."
+          git push -u origin staging --force
