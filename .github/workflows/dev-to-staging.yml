@@ -25,7 +25,7 @@ jobs:
       - name: Delete existing staging branch (local and remote)
         run: |
           # 원격 staging 브랜치 존재 여부 확인 및 삭제
-          if git ls-remote --heads origin staging | grep staging; then
+          if git ls-remote --heads origin staging; then
             echo "Deleting existing remote staging branch..."
             git push origin --delete staging
           else
