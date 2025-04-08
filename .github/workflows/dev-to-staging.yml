@@ -40,4 +40,4 @@ jobs:
           
           # 새로운 staging 브랜치를 원격에 push
           echo "Pushing new staging branch..."
-          git push -u origin staging --force
+          git push -u origin staging
