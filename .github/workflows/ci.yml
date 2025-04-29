@@ -1,39 +1,63 @@
-name: CI
+name: Nx Affected Build & Deploy
 
 on:
+  pull_request:
+    branches:
+      - dev
+      - staging
+      - main
   push:
     branches:
+      - dev
+      - staging
       - main
-  pull_request:
-
-permissions:
-  actions: read
-  contents: read
 
 jobs:
-  main:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # This enables task distribution via Nx Cloud
-      # Run this command as early as possible, before dependencies are installed
-      # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
-      # Uncomment this line to enable task distribution
-      # - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="build"
-
-      # Cache node_modules
-      - uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: 'yarn'
+          node-version: 20
 
-      - run: yarn install --frozen-lockfile
-      - uses: nrwl/nx-set-shas@v4
+      - name: Install dependencies
+        run: yarn install --immutable
 
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: npx nx-cloud record -- echo Hello World
-      # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
-      - run: npx nx affected -t lint test build
+      - name: Detect target base branch
+        id: detect-base
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "NX_BASE=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
+          else
+            echo "NX_BASE=${{ github.ref_name }}" >> $GITHUB_ENV
+          fi
+          echo "Using base branch: $NX_BASE"
+
+      - name: Get affected apps
+        id: affected
+        run: |
+          echo "##[group]Fetching affected projects"
+          AFFECTED_APPS=$(npx nx show projects --affected --target=build --base=origin/$NX_BASE --head=HEAD)
+          echo "Affected Apps: $AFFECTED_APPS"
+          echo "affected=$AFFECTED_APPS" >> $GITHUB_ENV
+          echo "##[endgroup]"
+
+      - name: Build affected apps
+        if: env.affected != '[]'
+        run: |
+          for app in $(echo ${{ env.affected }} | jq -r '.[]'); do
+            echo "Building app: $app"
+            yarn nx build $app
+          done
+
