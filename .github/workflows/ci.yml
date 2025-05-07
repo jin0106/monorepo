@@ -26,7 +26,7 @@ jobs:
           BASE=${{ github.event.pull_request.base.ref }}
           HEAD=$(git rev-parse HEAD)
           echo "Comparing from $BASE to $HEAD"
-          apps=$(yarn nx show projects --affected --base=origin/$BASE --head=$HEAD | tr ' ' '\n' | grep -E "^(app1|app2)$" | tr '\n' ',' | sed 's/,$//')
+          apps=$(yarn nx show projects --affected --base=origin/$BASE --head=$HEAD | tr -d '\r' | tr ' ' '\n' | grep -E "^(app1|app2)$" | paste -sd ',' -)
           echo "apps=$apps"
           echo "apps=$apps" >> $GITHUB_OUTPUT
 
