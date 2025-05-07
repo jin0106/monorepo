@@ -1,63 +1,52 @@
-name: Nx Affected Build & Deploy
+name: Selective Build
 
 on:
   pull_request:
     branches:
+      - main
       - dev
       - staging
-      - main
-  push:
-    branches:
-      - dev
-      - staging
-      - main
 
 jobs:
-  build-and-deploy:
+  detect-affected:
     runs-on: ubuntu-latest
-
-    env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-
+    outputs:
+      affected_apps: ${{ steps.get.outputs.apps }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Detect target base branch
-        id: detect-base
-        run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "NX_BASE=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
-          else
-            echo "NX_BASE=${{ github.ref_name }}" >> $GITHUB_ENV
-          fi
-          echo "Using base branch: $NX_BASE"
+        run: yarn install
 
       - name: Get affected apps
-        id: affected
+        id: get
         run: |
-          echo "##[group]Fetching affected projects"
-          AFFECTED_APPS=$(npx nx show projects --affected --target=build --base=origin/$NX_BASE --head=HEAD)
-          echo "Affected Apps: $AFFECTED_APPS"
-          echo "affected=$AFFECTED_APPS" >> $GITHUB_ENV
-          echo "##[endgroup]"
+          BASE=${{ github.event.pull_request.base.ref }}
+          HEAD=$(git rev-parse HEAD)
+          echo "Comparing from $BASE to $HEAD"
+          apps=$(yarn nx show projects --affected --base=origin/$BASE --head=$HEAD | tr ' ' '\n' | grep -E "^(app1|app2)$" | tr '\n' ',' | sed 's/,$//')
+          echo "apps=$apps"
+          echo "apps=$apps" >> $GITHUB_OUTPUT
 
-      - name: Build affected apps
-        if: env.affected != '[]'
+  build:
+    needs: detect-affected
+    runs-on: ubuntu-latest
+    if: ${{ needs.detect-affected.outputs.affected_apps != '' }}
+    strategy:
+      matrix:
+        app: [app1, app2]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build app
+        if: contains(needs.detect-affected.outputs.affected_apps, matrix.app)
         run: |
-          for app in $(echo ${{ env.affected }} | jq -r '.[]'); do
-            echo "Building app: $app"
-            yarn nx build $app
-          done
-
+          echo "Building ${{ matrix.app }}"
+          yarn nx build ${{ matrix.app }}
