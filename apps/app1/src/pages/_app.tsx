@@ -68,7 +68,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
                 <ReactQueryDevtoolsProduction position="bottom-right" />
               </React.Suspense>
             )}
-            <div>ignore test</div>
+            <div>ignore ignore</div>
             <Layout>
               <Component {...pageProps} />
             </Layout>
