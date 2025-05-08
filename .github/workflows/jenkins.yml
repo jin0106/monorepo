@@ -3,19 +3,18 @@ name: Trigger Jenkins Job
 on:
   workflow_dispatch:
 
-
-
-
 jobs:
   trigger-jenkins:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Jenkins Job on Repo A
-        uses: jabbukka/jenkins-trigger@main
-        with:
-          user_name: ${{ secrets.JENKINS_USER }}
-          api_token: ${{ secrets.JENKINS_TOKEN }}
-          url: ${{ secrets.JENKINS_URL }}   # http 포함된 전체 주소
-          job_name: "Neubie-go"  # 트리거할 Jenkins Job 이름
-          timeout: "1000"
-
+      - name: Trigger Jenkins Job
+        env:
+          JENKINS_URL: http://neubilitydev.iptime.org:58080/
+          JENKINS_USER: platform_dev
+          JENKINS_TOKEN: 11964ef778385dc2671b0c67cef0792266
+          JENKINS_JOB_PATH: job/Neubie-go
+        run: |
+          echo "Triggering Jenkins..."
+          curl -X POST -L \
+            --user "$JENKINS_USER:$JENKINS_TOKEN" \
+            "$JENKINS_URL/$JENKINS_JOB_PATH/build"
