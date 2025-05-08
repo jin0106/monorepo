@@ -17,4 +17,4 @@ jobs:
           BUILD_TOKEN: ${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}  # Jenkins Job 설정에서 등록한 토큰
         run: |
           curl -X POST -L --user ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }} \
-            ${{secrets.JENKINS_URL }}/job/Neubie-go/build?=token=${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}
+            ${{ secrets.JENKINS_URL }}/job/Neubie-go/build?token=${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}
