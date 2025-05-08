@@ -14,7 +14,7 @@ jobs:
           JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
           JENKINS_URL: ${{ secrets.JENKINS_URL }}   # http 포함된 전체 주소
           JOB_NAME: Neubie-go  # 트리거할 Jenkins Job 이름
-          BUILD_TOKEN: platform_dev_jenkins_token  # Jenkins Job 설정에서 등록한 토큰
+          BUILD_TOKEN: ${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}  # Jenkins Job 설정에서 등록한 토큰
         run: |
           echo "Fetching crumb..."
           CRUMB=$(curl -s -u "$JENKINS_USER:$JENKINS_TOKEN" "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
