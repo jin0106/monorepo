@@ -1,12 +1,12 @@
-name: Deploy to Vercel
+name: Deploy
 
 on:
   workflow_dispatch:
     inputs:
       app:
-        description: "Select app"
+        description: "Select app to be deployed"
         required: true
-        default: "app1"
+        default: "APP1"
         type: choice
         options:
           - APP1
@@ -18,16 +18,28 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets[format('VERCEL_PROJECT_ID_{0}', github.event.inputs.app)]}}
+      VERCEL_PROJECT_ID: ${{ github.event.inputs.app == 'APP1' && secrets.VERCEL_PROJECT_ID_APP1 || secrets.VERCEL_PROJECT_ID_APP2 }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
+      - name: Set App Name for slack notification
+        run: |
+          if [[ "${{ github.event.inputs.app }}" == "NEUBIE_GO" ]]; then
+            echo "APP_NAME=뉴비고" >> $GITHUB_ENV
+          elif [[ "${{ github.event.inputs.app }}" == "NEUBIE_ORDER" ]]; then
+            echo "APP_NAME=뉴비오더" >> $GITHUB_ENV
+          elif [[ "${{ github.event.inputs.app }}" == "NEUBIE_ORDER_ADMIN" ]]; then
+            echo "APP_NAME=뉴비오더 어드민" >> $GITHUB_ENV
+          fi
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
+
       - name: Pull Vercel Environment Information
         run: |
+
           if [ "${{ github.ref_name }}" == "main" ]; then
             vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           else
@@ -38,9 +50,9 @@ jobs:
       - name: Build Project Artifacts
         run: |
           if [ "${{ github.ref_name }}" == "main" ]; then
-            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+            vercel build --prod 
           else
-            vercel build --token=${{ secrets.VERCEL_TOKEN }}
+            vercel build 
           fi
 
       - name: Deploy Project Artifacts to Vercel
@@ -50,3 +62,34 @@ jobs:
           else
             vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
           fi
+
+      - name: Slack Notification
+        if: always()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: ${{ job.status == 'success' && 'good' || job.status == 'failure' && 'danger' || 'warning' }}
+          SLACK_CUSTOM_PAYLOAD: '{
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*🚀 프론트엔드 배포 시작 알림*"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "앱: *${{ github.event.inputs.app }}* \n배포 환경: *${{ github.ref_name }}*\n 배포 결과: *${{ job.status }}*"
+                }
+              }
+            ]
+          }'
+  trigger-qa-automation-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger QA Test Workflow
+        if: success() && github.ref_name == 'staging'
+        uses: ./.github/workflows/jenkins.yml
