@@ -87,9 +87,7 @@ jobs:
               }
             ]
           }'
-  trigger-qa-automation-test:
-    runs-on: ubuntu-latest
-    steps:
+
       - name: Trigger QA Test Workflow
         if: success() && github.ref_name == 'staging'
-        uses: ./.github/workflows/jenkins.yml
+        uses: ./.github/actions/trigger-qa-test
