@@ -1,13 +1,26 @@
-name: Trigger A Jenkins Job
+name: Trigger Jenkins Job
 
 on:
   workflow_dispatch:
 
 
 jobs:
-  call-jenkins:
+  trigger-jenkins:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Jenkins Job in A
+      - name: Trigger Jenkins Job on Repo A
+        env:
+          JENKINS_USER: ${{ secrets.JENKINS_USER }}
+          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+          JENKINS_URL: ${{ secrets.JENKINS_URL }}   # http 포함된 전체 주소
+          JOB_NAME: Neubie-go  # 트리거할 Jenkins Job 이름
+          BUILD_TOKEN: platform_dev_jenkins_token  # Jenkins Job 설정에서 등록한 토큰
         run: |
-          curl -X POST "http://neubilitydev.iptime.org:58080/job/Neubie-go/build?token=platform_dev_jenkins_token"
+          echo "Fetching crumb..."
+          CRUMB=$(curl -s -u "$JENKINS_USER:$JENKINS_TOKEN" "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
+          
+          echo "Triggering Jenkins job..."
+          curl -X POST \
+            -u "$JENKINS_USER:$JENKINS_TOKEN" \
+            -H "$CRUMB" \
+            "$JENKINS_URL/job/$JOB_NAME/build?token=$BUILD_TOKEN"
