@@ -9,10 +9,10 @@ jobs:
     steps:
       - name: Trigger Jenkins Job
         env:
-          JENKINS_URL: http://neubilitydev.iptime.org:58080/
-          JENKINS_USER: platform_dev
-          JENKINS_TOKEN: 11964ef778385dc2671b0c67cef0792266
-          JENKINS_JOB_PATH: job/Neubie-go
+          JENKINS_URL: "http://neubilitydev.iptime.org:58080/"
+          JENKINS_USER: "platform_dev"
+          JENKINS_TOKEN: "11964ef778385dc2671b0c67cef0792266"
+          JENKINS_JOB_PATH: "job/Neubie-go"
         run: |
           echo "Triggering Jenkins..."
           curl -X POST -L \
