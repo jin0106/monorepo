@@ -20,7 +20,7 @@ jobs:
           CRUMB=$(curl -s -u "$JENKINS_USER:$JENKINS_TOKEN" "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
           
           echo "Triggering Jenkins job..."
-          echo "$JENKINS_URL/job/$JOB_NAME/build?token=$BUILD_TOKEN"
+          echo "${{ secrets.JENKINS_URL }}/job/Neubie-go/build?token=${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}"
           curl -X POST \
             -u "$JENKINS_USER:$JENKINS_TOKEN" \
             -H "$CRUMB" \
