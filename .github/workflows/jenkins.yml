@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Jenkins Job on Repo A
-        uses: sbitio/trigger-jenkins-job@master
+        uses: jabbukka/jenkins-trigger@main
         with:
-          JENKINS_USER: ${{ secrets.JENKINS_USER }}
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
-          JENKINS_HOST: ${{ secrets.JENKINS_URL }}   # http 포함된 전체 주소
-          JENKINS_JOB: Neubie-go  # 트리거할 Jenkins Job 이름
-          JENKINS_PARAMS: no
+          user_name: ${{ secrets.JENKINS_USER }}
+          api_token: ${{ secrets.JENKINS_TOKEN }}
+          url: ${{ secrets.JENKINS_URL }}   # http 포함된 전체 주소
+          job_name: "Neubie-go"  # 트리거할 Jenkins Job 이름
+          timeout: "1000"
 
