@@ -10,4 +10,4 @@ jobs:
     steps:
       - name: Trigger Jenkins Job in A
         run: |
-          curl -X POST ${{ secrets.JENKINS_URL }}
+          curl -X POST "http://neubilitydev.iptime.org:58080/job/Neubie-go/build?token=platform_dev_jenkins_token"
