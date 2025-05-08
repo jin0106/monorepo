@@ -57,9 +57,9 @@ jobs:
           yarn install 
           
           if [ "${{ github.ref_name }}" == "main" ]; then
-            yarn nx build "$lower_app" --prod --token=${{ secrets.VERCEL_TOKEN }}
+            yarn nx build "$lower_app" --prod 
           else
-            yarn nx build "$lower_app" --token=${{ secrets.VERCEL_TOKEN }}
+            yarn nx build "$lower_app" 
           fi
 
       - name: Deploy Project Artifacts to Vercel
