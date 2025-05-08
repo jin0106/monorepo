@@ -54,6 +54,7 @@ jobs:
           app="${{ github.event.inputs.app }}"
           lower_app=$(echo "$app" | tr '[:upper:]' '[:lower:]')
           echo "APP_LOWER=$lower_app" >> $GITHUB_ENV
+          yarn install 
           
           if [ "${{ github.ref_name }}" == "main" ]; then
             yarn nx build "$lower_app" --prod --token=${{ secrets.VERCEL_TOKEN }}
