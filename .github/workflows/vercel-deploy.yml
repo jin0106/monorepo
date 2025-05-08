@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets[format('VERCEL_PROJECT_ID_{0}', github.event.inputs.app)]}}
+      VERCEL_PROJECT_ID: ${{ github.event.inputs.app == 'APP1' && secrets.VERCEL_PROJECT_ID_APP1 || secrets.VERCEL_PROJECT_ID_APP2 }}
 
     steps:
       - uses: actions/checkout@v4
@@ -33,14 +33,15 @@ jobs:
             echo "APP_NAME=뉴비오더 어드민" >> $GITHUB_ENV
           fi
 
-
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
+      - name: Remove .vercel (clean broken link)
+        run: rm -rf .vercel
+
       - name: Pull Vercel Environment Information
         run: |
-          echo "----------------"
-          echo ${{ secrets[format('VERCEL_PROJECT_ID_{0}', github.event.inputs.app)] }}
+
           if [ "${{ github.ref_name }}" == "main" ]; then
             vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           else
@@ -50,10 +51,15 @@ jobs:
 
       - name: Build Project Artifacts
         run: |
+          app="${{ github.event.inputs.app }}"
+          lower_app=$(echo "$app" | tr '[:upper:]' '[:lower:]')
+          echo "APP_LOWER=$lower_app" >> $GITHUB_ENV
+          yarn install 
+          
           if [ "${{ github.ref_name }}" == "main" ]; then
-            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }} --skip-nx-cache
+            vercel build --prod 
           else
-            vercel build --token=${{ secrets.VERCEL_TOKEN }} --skip-nx-cache
+            vercel build 
           fi
 
       - name: Deploy Project Artifacts to Vercel
