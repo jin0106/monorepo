@@ -59,7 +59,7 @@ jobs:
           if [ "${{ github.ref_name }}" == "main" ]; then
             vercel build --prod 
           else
-            vercel build "$lower_app" 
+            vercel build 
           fi
 
       - name: Deploy Project Artifacts to Vercel
