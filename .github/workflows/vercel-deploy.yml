@@ -6,7 +6,7 @@ on:
       app:
         description: "Select app to be deployed"
         required: true
-        default: "app1"
+        default: "APP1"
         type: choice
         options:
           - APP1
