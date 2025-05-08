@@ -51,10 +51,14 @@ jobs:
 
       - name: Build Project Artifacts
         run: |
+          app="${{ github.event.inputs.app }}"
+          lower_app=$(echo "$app" | tr '[:upper:]' '[:lower:]')
+          echo "APP_LOWER=$lower_app" >> $GITHUB_ENV
+          
           if [ "${{ github.ref_name }}" == "main" ]; then
-            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+            yarn nx build "$lower_app" --prod --token=${{ secrets.VERCEL_TOKEN }}
           else
-            vercel build --token=${{ secrets.VERCEL_TOKEN }}
+            yarn nx build "$lower_app" --token=${{ secrets.VERCEL_TOKEN }}
           fi
 
       - name: Deploy Project Artifacts to Vercel
