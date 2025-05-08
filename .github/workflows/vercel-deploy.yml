@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ github.event.inputs.app == 'APP1' && secrets.VERCEL_PROJECT_ID_APP1 || secrets.VERCEL_PROJECT_ID_APP2 }}
 
     steps:
       - uses: actions/checkout@v4
@@ -32,14 +33,6 @@ jobs:
             echo "APP_NAME=뉴비오더 어드민" >> $GITHUB_ENV
           fi
 
-      - name: Set VERCEL_PROJECT_ID based on app input
-        run: |
-          if [[ "${{ github.event.inputs.app }}" == "APP1" ]]; then
-            echo "VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID_APP1 }}" >> $GITHUB_ENV
-          elif [[ "${{ github.event.inputs.app }}" == "APP2" ]]; then
-            echo "VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID_APP2 }}" >> $GITHUB_ENV
-          fi
-
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
@@ -47,9 +40,9 @@ jobs:
         run: |
 
           if [ "${{ github.ref_name }}" == "main" ]; then
-            vercel pull --yes --environment=production --project-id=$VERCEL_PROJECT_ID --token=${{ secrets.VERCEL_TOKEN }}
+            vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           else
-            vercel pull --yes --environment=preview --git-branch=staging --project-id=$VERCEL_PROJECT_ID --token=${{ secrets.VERCEL_TOKEN }}
+            vercel pull --yes --environment=preview --git-branch=staging --token=${{ secrets.VERCEL_TOKEN }}
           fi
 
 
