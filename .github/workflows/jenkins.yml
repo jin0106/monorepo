@@ -18,10 +18,10 @@ jobs:
         run: |
           echo "Fetching crumb..."
           CRUMB=$(curl -s -u "$JENKINS_USER:$JENKINS_TOKEN" "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
-          echo "$CRUB"
+          echo "$CRUMB"
           echo "$JENKINS_USER:$JENKINS_TOKEN"
           echo "Triggering Jenkins job..."
           curl -X POST \
             -u "$JENKINS_USER:$JENKINS_TOKEN" \
             -H "$CRUMB" \
-            "${{ secrets.JENKINS_URL }}/build?token=${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}"
+            "${{ secrets.JENKINS_URL }}/job/Neubie-go/build?token=${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}"
