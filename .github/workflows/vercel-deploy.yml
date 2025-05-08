@@ -87,3 +87,6 @@ jobs:
               }
             ]
           }'
+      - name: Trigger QA Test Workflow
+        if: success() && github.ref_name == 'staging'
+        uses: ./.github/workflows/trigger-qa-test.yml
