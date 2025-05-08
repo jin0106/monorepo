@@ -9,13 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Jenkins Job on Repo A
-        env:
-          JENKINS_USER: ${{ secrets.JENKINS_USER }}
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
-          JENKINS_URL: ${{ secrets.JENKINS_URL }}   # http 포함된 전체 주소
-          JOB_NAME: Neubie-go  # 트리거할 Jenkins Job 이름
-          BUILD_TOKEN: ${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}  # Jenkins Job 설정에서 등록한 토큰
-        run: |
-          curl -X POST -L \
-            --user "$JENKINS_USER:$JENKINS_TOKEN" \
-            "$JENKINS_URL/job/$JOB_NAME/build?token=$BUILD_TOKEN"
+        uses: toptal/jenkins-job-trigger-action@master
+        with:
+          jenkins_url: ${{ secrets.JENKINS_URL }}   # http 포함된 전체 주소
+          jenkins_user: ${{ secrets.JENKINS_USER }}
+          jenkins_token: ${{ secrets.JENKINS_TOKEN }}
+          job_name: Neubie-go  # 트리거할 Jenkins Job 이름
