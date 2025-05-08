@@ -23,4 +23,4 @@ jobs:
           curl -X POST \
             -u "$JENKINS_USER:$JENKINS_TOKEN" \
             -H "$CRUMB" \
-            "${{ secrets.JENKINS_URL }}/job/Neubie-go/build?token=${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}"
+            "${{ secrets.JENKINS_URL }}/build?token=${{ secrets.JENKINS_NEUBIE_GO_BUILD_TOKEN }}"
