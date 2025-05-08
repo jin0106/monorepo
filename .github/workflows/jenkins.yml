@@ -1,7 +1,7 @@
 name: Trigger Jenkins Job
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   trigger-jenkins:
