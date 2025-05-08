@@ -1,72 +1,88 @@
-name: Build & Deploy Affected Apps
+name: Deploy
 
 on:
-  merge_group:
-    branches: [main, dev]
+  workflow_dispatch:
+    inputs:
+      app:
+        description: "Select app to be deployed"
+        required: true
+        default: "app1"
+        type: choice
+        options:
+          - APP1
+          - APP2
 
 jobs:
-  detect-affected:
+  deploy:
+    if: github.ref_name == 'main' || github.ref_name == 'staging'
     runs-on: ubuntu-latest
-    outputs:
-      affected: ${{ steps.set.outputs.apps }}
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets[format('VERCEL_PROJECT_ID_{0}', github.event.inputs.app)]}}
+
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Detect affected apps
-        id: set
+      - name: Set App Name for slack notification
         run: |
-          BASE=${{ github.event.pull_request.base.ref }}
-          APPS=$(yarn nx show projects --affected --base=origin/$BASE --head=HEAD | tr ' ' '\n' | grep -E "^(app1|app2)$" | tr '\n' ',' | sed 's/,$//')
-          echo "apps=$APPS"
-          echo "apps=$APPS" >> $GITHUB_OUTPUT
-
-  build-and-deploy:
-    needs: detect-affected
-    if: ${{ needs.detect-affected.outputs.affected != '' }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: [app1, app2]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Check if app is affected
-        id: check
-        run: |
-          echo "affected=${{ needs.detect-affected.outputs.affected }}" > affected.txt
-          if grep -qw "${{ matrix.app }}" affected.txt; then
-            echo "should_deploy=true" >> $GITHUB_OUTPUT
-          else
-            echo "should_deploy=false" >> $GITHUB_OUTPUT
+          if [[ "${{ github.event.inputs.app }}" == "NEUBIE_GO" ]]; then
+            echo "APP_NAME=뉴비고" >> $GITHUB_ENV
+          elif [[ "${{ github.event.inputs.app }}" == "NEUBIE_ORDER" ]]; then
+            echo "APP_NAME=뉴비오더" >> $GITHUB_ENV
+          elif [[ "${{ github.event.inputs.app }}" == "NEUBIE_ORDER_ADMIN" ]]; then
+            echo "APP_NAME=뉴비오더 어드민" >> $GITHUB_ENV
           fi
 
-      - name: Build app
-        if: steps.check.outputs.should_deploy == 'true'
-        run: yarn nx build ${{ matrix.app }}
 
-      - name: Deploy to Vercel
-        if: steps.check.outputs.should_deploy == 'true'
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
         run: |
-          npm install -g vercel@latest
-          APP_DIR="apps/${{ matrix.app }}"
-          PROJECT_ID_VAR="VERCEL_PROJECT_ID_$(echo '${{ matrix.app }}' | tr '[:lower:]-' '[:upper:]_')"
-          PROJECT_ID=${{ secrets[format('VERCEL_PROJECT_ID_{0}', matrix.app) ] }}
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel pull --yes --environment=preview --git-branch=staging --token=${{ secrets.VERCEL_TOKEN }}
+          fi
 
-          echo "Deploying ${{ matrix.app }} to Vercel"
 
-          vercel deploy --cwd $APP_DIR \
-            --token ${{ secrets.VERCEL_TOKEN }} \
-            --org ${{ secrets.VERCEL_ORG_ID }} \
-            --project $PROJECT_ID \
-            --prod \
-            --yes
+      - name: Build Project Artifacts
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }} --skip-nx-cache
+          else
+            vercel build --token=${{ secrets.VERCEL_TOKEN }} --skip-nx-cache
+          fi
+
+      - name: Deploy Project Artifacts to Vercel
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+
+      - name: Slack Notification
+        if: always()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: ${{ job.status == 'success' && 'good' || job.status == 'failure' && 'danger' || 'warning' }}
+          SLACK_CUSTOM_PAYLOAD: '{
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*🚀 프론트엔드 배포 시작 알림*"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "앱: *${{ env.APP_NAME }}* \n배포 환경: *${{ github.ref_name }}*\n 배포 결과: *${{ job.status }}*"
+                }
+              }
+            ]
+          }'
