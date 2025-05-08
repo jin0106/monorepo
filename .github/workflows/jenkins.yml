@@ -1,0 +1,13 @@
+name: Trigger A Jenkins Job
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  call-jenkins:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Jenkins Job in A
+        run: |
+          curl -X POST ${{ secrets.JENKINS_URL }}
