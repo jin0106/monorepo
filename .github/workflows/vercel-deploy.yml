@@ -36,8 +36,6 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Remove .vercel (clean broken link)
-        run: rm -rf .vercel
 
       - name: Pull Vercel Environment Information
         run: |
@@ -89,3 +87,6 @@ jobs:
               }
             ]
           }'
+      - name: Trigger QA Test Workflow
+        if: success() && github.ref_name == 'staging'
+        uses: ./.github/workflows/trigger-qa-test.yml
