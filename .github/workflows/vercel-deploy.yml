@@ -91,7 +91,3 @@ jobs:
       - name: Trigger QA Test Workflow
         if: success() && github.ref_name == 'staging'
         uses: ./.github/actions/trigger-qa-test
-        with:
-          jenkins_url: ${{ secrets.JENKINS_URL }}
-          jenkins_user: ${{ secrets.JENKINS_USER }}
-          jenkins_token: ${{ secrets.JENKINS_TOKEN }}
