@@ -1,0 +1,48 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    if: github.ref_name == 'dev'
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+
+
+
+      - name: Determine affected apps and deploy individually
+        run: |
+          git fetch origin dev --depth=2
+          AFFECTED=$(yarn nx show projects --affected --base=origin/dev --head=HEAD | tr -d '\r' | tr ' ' '\n')
+          echo "Affected apps: $AFFECTED"
+          
+          for app in $AFFECTED; do
+            case $app in
+              app1)
+                PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID_APP1 }}
+                ;;
+              app2)
+                PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID_APP2 }}
+                ;;
+              *)
+                echo "Skipping non-target app: $app"
+                continue
+                ;;
+            esac
+
+            echo "Deploying $app..."
+            vercel pull --yes --environment=preview --git-branch=dev --token=${{ secrets.VERCEL_TOKEN }} --cwd apps/$app
+            vercel build --cwd apps/$app
+            vercel deploy --prebuilt --cwd apps/$app --token=${{ secrets.VERCEL_TOKEN }} --org $VERCEL_ORG_ID --project $PROJECT_ID
+          done
