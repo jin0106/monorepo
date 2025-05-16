@@ -2,14 +2,8 @@
   "git": {
     "deploymentEnabled": {
       "main": false,
-      "staging": false,
-      "neom": false,
-      "neom-staging": false
+      "staging": false
     }
   },
-  "build": {
-    "env": {
-      "NX_CACHE_DIRECTORY": ".nx/cache"
-    }
-  }
+  "ignoreCommand": "echo \"VERCEL_GIT_COMMIT_REF=$VERCEL_GIT_COMMIT_REF\"; if [ \"$VERCEL_GIT_COMMIT_REF\" != \"dev\" ] && [ \"$VERCEL_GIT_COMMIT_REF\" != \"staging\" ] && [ \"$VERCEL_GIT_COMMIT_REF\" != \"main\" ]; then echo \"🛑 Skipping build on branch: $VERCEL_GIT_COMMIT_REF\"; exit 0; else echo \"✅ Proceeding with build on branch: $VERCEL_GIT_COMMIT_REF\"; fi"
 }
