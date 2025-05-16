@@ -5,5 +5,5 @@
       "staging": false
     }
   },
-  "ignoreCommand": "echo \"VERCEL_GIT_COMMIT_REF=$VERCEL_GIT_COMMIT_REF\"; if [ \"$VERCEL_GIT_COMMIT_REF\" != \"dev\" ] && [ \"$VERCEL_GIT_COMMIT_REF\" != \"staging\" ] && [ \"$VERCEL_GIT_COMMIT_REF\" != \"main\" ]; then echo \"🛑 Skipping build on branch: $VERCEL_GIT_COMMIT_REF\"; exit 0; else echo \"✅ Proceeding with build on branch: $VERCEL_GIT_COMMIT_REF\"; fi"
+  "ignoreCommand": "b=$VERCEL_GIT_COMMIT_REF; echo \"Branch=$b\"; if [ \"$b\" != \"dev\" ] && [ \"$b\" != \"staging\" ] && [ \"$b\" != \"main\" ]; then echo \"Skip $b\"; exit 0; fi"
 }
