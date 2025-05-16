@@ -5,5 +5,4 @@
       "staging": false
     }
   },
-  "ignoreCommand": "b=$VERCEL_GIT_COMMIT_REF; echo \"Branch=$b\"; if [ \"$b\" != \"dev\" ] && [ \"$b\" != \"staging\" ] && [ \"$b\" != \"main\" ]; then echo \"Skip $b\"; exit 0; fi"
-}
+  "ignoreCommand": "b=$VERCEL_GIT_COMMIT_REF; echo \"Branch=$b\"; if [ \"$b\" != \"dev\" ] && [ \"$b\" != \"staging\" ] && [ \"$b\" != \"main\" ]; then echo \"Skip $b\"; exit 0; else exit 1; fi"}
