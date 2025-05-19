@@ -15,20 +15,11 @@ if (!appName) {
 }
 
 try {
-  try {
-    execSync(`git fetch origin main --depth=2`, { stdio: "inherit" });
-  } catch (err) {
-    console.warn("⚠️ origin/main fetch 실패 (무시하고 진행)");
-  }
-  // origin/{branch} 와 현재 커밋을 비교하여 affected 프로젝트 추출
-  const commitSha = process.env.VERCEL_GIT_COMMIT_SHA;
+
   const affected = execSync(
     `npx nx show projects --affected --base=HEAD^ --plain`,
     { encoding: "utf-8" }
   ).split("\n").filter(Boolean);
-
-  console.log('affected',affected)
-  console.log('appName',appName)
 
   if (!affected.includes(appName)) {
     console.log(`🟡 '${appName}'는 변경되지 않았습니다. Build Skipped.`);
