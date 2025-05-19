@@ -36,6 +36,8 @@ try {
   }
 
   console.log(`✅ '${appName}' 변경됨. Build 진행.`);
+  process.exit(1);
+
 } catch (err) {
   console.error("❗ nx affected 실행 오류 – 빌드 강제 진행", err);
   // 실패 시 빌드를 계속하도록 함
