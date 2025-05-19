@@ -15,7 +15,7 @@ if (!appName) {
 }
 
 try {
-
+  execSync(`git fetch origin main --depth=2`, { stdio: "inherit" });
   // origin/{branch} 와 현재 커밋을 비교하여 affected 프로젝트 추출
   const affected = execSync(
     `npx nx show projects --affected --base=origin/main --plain`,
