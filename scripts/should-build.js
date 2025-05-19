@@ -15,10 +15,15 @@ if (!appName) {
 }
 
 try {
-  execSync(`git fetch origin main --depth=2`, { stdio: "inherit" });
+  try {
+    execSync(`git fetch origin main --depth=2`, { stdio: "inherit" });
+  } catch (err) {
+    console.warn("⚠️ origin/main fetch 실패 (무시하고 진행)");
+  }
   // origin/{branch} 와 현재 커밋을 비교하여 affected 프로젝트 추출
+  const commitSha = process.env.VERCEL_GIT_COMMIT_SHA;
   const affected = execSync(
-    `npx nx show projects --affected --base=origin/main --plain`,
+    `npx nx show projects --affected --base=origin/main --head=${commitSha} --plain`,
     { encoding: "utf-8" }
   ).split("\n").filter(Boolean);
 
