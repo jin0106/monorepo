@@ -2,14 +2,7 @@
   "git": {
     "deploymentEnabled": {
       "main": false,
-      "staging": false,
-      "neom": false,
-      "neom-staging": false
+      "staging": false
     }
   },
-  "build": {
-    "env": {
-      "NX_CACHE_DIRECTORY": ".nx/cache"
-    }
-  }
-}
+  "ignoreCommand": "b=$VERCEL_GIT_COMMIT_REF; echo \"Branch=$b\"; if [ \"$b\" != \"dev\" ] && [ \"$b\" != \"staging\" ] && [ \"$b\" != \"main\" ]; then echo \"Skip $b\"; exit 0; else exit 1; fi"}
