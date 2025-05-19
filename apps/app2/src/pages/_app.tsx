@@ -63,7 +63,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
       <AuthContainer.Provider>
         <NativeBridgeContainer.Provider>
           <Hydrate state={pageProps && pageProps.dehydratedState}>
-            <div>app2 </div>
+            <div>app222 </div>
             {showDevtools && (
               <React.Suspense fallback={null}>
                 <ReactQueryDevtoolsProduction position="bottom-right" />

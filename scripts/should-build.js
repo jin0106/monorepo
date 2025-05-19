@@ -16,11 +16,10 @@ if (!appName) {
 
 try {
   // 해당 브랜치의 origin을 fetch하여 비교 대상 확보
-  execSync(`git fetch origin ${branch} --depth=2`, { stdio: "inherit" });
 
   // origin/{branch} 와 현재 커밋을 비교하여 affected 프로젝트 추출
   const affected = execSync(
-    `npx nx show projects --affected --base=origin/${branch} --head=${process.env.VERCEL_GIT_COMMIT_SHA} --plain`,
+    `npx nx show projects --affected --base=origin/main  --plain`,
     { encoding: "utf-8" }
   ).split("\n").filter(Boolean);
 
