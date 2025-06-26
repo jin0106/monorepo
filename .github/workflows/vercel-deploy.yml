@@ -25,9 +25,9 @@ jobs:
 
       - name: Set App Name for slack notification
         run: |
-          if [[ "${{ github.event.inputs.app }}" == "NEUBIE_GO" ]]; then
+          if [[ "${{ github.event.inputs.app }}" == "APP1" ]]; then
             echo "APP_NAME=뉴비고" >> $GITHUB_ENV
-          elif [[ "${{ github.event.inputs.app }}" == "NEUBIE_ORDER" ]]; then
+          elif [[ "${{ github.event.inputs.app }}" == "APP2" ]]; then
             echo "APP_NAME=뉴비오더" >> $GITHUB_ENV
           elif [[ "${{ github.event.inputs.app }}" == "NEUBIE_ORDER_ADMIN" ]]; then
             echo "APP_NAME=뉴비오더 어드민" >> $GITHUB_ENV
@@ -75,7 +75,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "*🚀 프론트엔드 배포 시작 알림*"
+                  "text": "*🚀 프론트엔드 배포 완료 알림*"
                 }
               },
               {
