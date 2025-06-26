@@ -82,7 +82,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "앱: *${{ github.event.inputs.app }}* \n배포 환경: *${{ github.ref_name }}*\n 배포 결과: *${{ job.status }}*"
+                  "text": "앱: *${{ env.APP_NAME }}* \n배포 환경: *${{ github.ref_name }}*\n 배포 결과: *${{ job.status }}*"
                 }
               }
             ]
