@@ -69,25 +69,25 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_COLOR: ${{ job.status == 'success' && 'good' || job.status == 'failure' && 'danger' || 'warning' }}
-          SLACK_CUSTOM_PAYLOAD: '{
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "*🚀 프론트엔드 배포 완료 알림*"
+          SLACK_CUSTOM_PAYLOAD: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*🚀 프론트엔드 배포 완료 알림*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "앱: *${{ env.APP_NAME }}*\n배포 환경: *${{ github.ref_name }}*\n배포 결과: *${{ job.status == 'success' && '성공' || '실패' }}*"
+                  }
                 }
-              },
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "앱: *${{ env.APP_NAME }}* \n배포 환경: *${{ github.ref_name }}*\n 배포 결과: *${{ job.status }}*"
-                }
-              }
-            ]
-          }'
-
+              ]
+            }
       - name: Trigger QA Test Workflow
         if: success() && github.ref_name == 'staging'
         uses: ./.github/actions/trigger-qa-test
